@@ -1,5 +1,5 @@
 # from sqlalchemy import Column, String, Text, Integer, DateTime
-from app import db
+from elice_library import db
 from datetime import datetime
 
 
