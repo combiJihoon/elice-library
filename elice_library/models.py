@@ -1,14 +1,15 @@
 # from sqlalchemy import Column, String, Text, Integer, DateTime
-from elice_library import db
+from app import db
+from datetime import datetime
 
 
 class User(db.Model):
     __tablename__ = 'user'
 
-    user_id = db.Column(db.String(150), Nullable=False, primary_key=True)
-    user_password = db.Column(db.String(150), Nullable=False)
-    user_name = db.Column(db.String(100), Nullable=False)
-    children = db.relationship()
+    user_id = db.Column(db.String(150), nullable=False,
+                        primary_key=True, unique=True)
+    user_password = db.Column(db.String(150), nullable=False)
+    user_name = db.Column(db.String(100), nullable=False)
 
     def __init__(self, user_id, user_password, user_name):
         self.user_id = user_id
@@ -19,49 +20,56 @@ class User(db.Model):
 class Book(db.Model):
     __tablename__ = 'book'
 
-    book_id = db.Column(db.Integer, Nullable=False,
+    book_id = db.Column(db.Integer, nullable=False,
                         primary_key=True, autoincrement=True)
-    book_name = db.Column(db.String(255), Nullable=False)
-    author = db.Column(db.String(100), Nullable=False)
-    publication_date = db.Column(db.DateTime, Nullable=False)
-    pages = db.Column(db.Integer, Nullable=False)
-    isbn = db.Column(db.Integer, Nullable=False)
-    description = db.Column(db.Text())
-    link = db.Column(db.String(255))
-    img_url = db.Column(db.String(255))
-    stock = db.Column(db.Integer, Nullable=False)
+    book_name = db.Column(db.String(255), nullable=False)
+    publisher = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(100), nullable=False)
+    publicated_at = db.Column(db.DateTime, nullable=False)
+    pages = db.Column(db.Integer, nullable=False)
+    isbn = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text(), nullable=True)
+    img_url = db.Column(db.String(255), nullable=True)
+    stock = db.Column(db.Integer, nullable=False)
 
 
 class Rental(db.Model):
     __tablename__ = 'rental'
 
-    book_id = db.Column(db.Integer, db.Foreign_key(
-        'book.book_id', on_delete='CASCADE'), Nullable=False)
-    user_id = db.Column(db.String(150), db.Foreign_key(
-        'user.user_id', on_delete='CASCADE'), Nullable=False)
-    rented_at = db.Column(db.DateTime, Nullable=False)
-    returned_at = db.Column(db.DateTime, Nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    book_id = db.Column(db.Integer, db.ForeignKey(
+        'book.book_id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.String(150), db.ForeignKey(
+        'user.user_id', ondelete='CASCADE'), nullable=False)
+    rented_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
+    returned_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
 
-    book = db.relationship('Book', backref=db.backref('rental'))
-    user = db.relationship('User', backref=db.backref('rental'))
+    book = db.relationship('Book', backref=db.backref('rental_set'))
+    user = db.relationship('User', backref=db.backref('rental_set'))
 
 
 class Comment(db.Model):
     __tablename__ = 'comment'
 
-    comment_id = db.Column(db.Integer, Nullable=False,
+    comment_id = db.Column(db.Integer, nullable=False,
                            primary_key=True, autoincrement=True)
-    book_id = db.Column(db.Integer, db.Foreign_key(
-        'book.book_id', on_delete='CASCADE'), Nullable=False)
-    user_id = db.Column(db.String(150), db.Foreign_key(
-        'user.user_id', on_delete='CASCADE'), Nullable=False)
-    content = db.Column(db.Text(), Nullable=False)
-    rating = db.Column(db.Integer, Nullable=False)
-    created_at = db.Column(db.DateTime, Nullable=False)
-    modified_at = db.Column(db.DateTime, Nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey(
+        'book.book_id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.String(150), db.ForeignKey(
+        'user.user_id', ondelete='CASCADE'), nullable=False)
+    content = db.Column(db.Text(), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
+    modified_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
 
-    book = db.relationship('Book', backref=db.backref('comment'))
-    user = db.relationship('User', backref=db.backref('comment'))
+    book = db.relationship('Book', backref=db.backref(
+        'comment_set'))
+    user = db.relationship('User', backref=db.backref(
+        'comment_set'))
 
     def __init__(self, content, rating):
         self.content = content
