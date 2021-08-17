@@ -57,3 +57,9 @@ def signup():
             return redirect(url_for('main.signup'))
     else:
         return render_template('signup.html', signup_form=signup_form)
+
+
+@bp.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect(url_for('main.home'))
