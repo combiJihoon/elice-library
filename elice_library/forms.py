@@ -25,7 +25,7 @@ def user_password_check(form, field):
 '''
 
 
-class RegistrationForm(FlaskForm):
+class SignupForm(FlaskForm):
     user_id = StringField("elice@elice.com", validators=[
                           DataRequired("아이디는 필수로 입력해야 합니다."), Email("이메일 형식으로 입력해야 합니다.")])
     user_password = PasswordField("비밀번호를 입력하세요", validators=[
