@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, url_for, flash, session
 from werkzeug.utils import redirect
-from forms import LoginForm, SignupForm
+from ..forms import LoginForm, SignupForm
 from bcrypt import checkpw, hashpw, gensalt
-from models import *
+from ..models import *
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 

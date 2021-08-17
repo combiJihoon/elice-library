@@ -22,10 +22,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from . import models
-
     # blueprint
     from .views import main_view, auth_view, comment_view, myrental_view
+    from . import models
+
     app.register_blueprint(main_view.bp)
     app.register_blueprint(auth_view.bp)
     app.register_blueprint(comment_view.bp)

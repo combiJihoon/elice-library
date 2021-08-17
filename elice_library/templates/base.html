@@ -17,32 +17,29 @@
         <nav class="navbar navbar-expand-sm bg-light">
             <ul id="nav-title" class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.home')}}">책벌레</a>
+                    <a class="nav-link" href="{{ url_for('main.home')}}">레이서 도서관</a>
                 </li>
             </ul>
             <ul id="nav-right">
-                {% if session['user_id'] %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('mypage.myposts') }}">{{session['user_id']}}님의 글귀</a>
+                    <a class="nav-link" href="#">대여기록</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a>
+                    <a class="nav-link" href="#">로그아웃</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('post.create_post')}}">
+                    <a href="#">
                         <button type="button" class="btn_post">
-                            글귀 작성하기
+                            반납하기
                         </button>
                     </a>
                 </li>
-                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">로그인</a>
+                    <a class="nav-link" href="#">로그인</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.join') }}">회원가입</a>
+                    <a class="nav-link" href="#">회원가입</a>
                 </li>
-                {% endif %}
             </ul>
         </nav>
     </header>

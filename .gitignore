@@ -245,5 +245,7 @@ Temporary Items
 # Made myself
 .python-version
 .db
+config
 config.py
 migrations
+run.sh
