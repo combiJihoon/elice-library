@@ -9,7 +9,7 @@
 
 - [x] DB 설계
 - [x] API 설계  
-       :point_right: main_view, auth_viewmyrental_view,comment_view
+       :point_right: main_view, auth_view, myrental_view,comment_view
 - [x] 스켈레톤 코드 작성
 
 **8월 17일 (화)**
