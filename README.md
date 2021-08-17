@@ -7,11 +7,15 @@
 
 **8월 16일 (월)**
 
-- [x] 스켈레톤 코드 작성
 - [x] DB 설계
+- [x] API 설계  
+       :point_right: main_view, auth_viewmyrental_view,comment_view
+- [x] 스켈레톤 코드 작성
 
 **8월 17일 (화)**
 
+- [ ] 데이터 로드
+- [ ] 폼 생성
 - [ ] 로그인 기능 구현
 - [ ] nav bar 구현
 
