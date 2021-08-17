@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, flash, session
 from werkzeug.utils import redirect
-from forms import LoginForm, RegistrationForm
+from forms import LoginForm, SignupForm
 from bcrypt import checkpw, hashpw, gensalt
 from models import *
 
@@ -35,12 +35,16 @@ def login():
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    registration_form = RegistrationForm(request.form)
-    user_id = registration_form.user_id
-    user_password = registration_form.user_password
-    user_name = registration_form.user_name
-    if request.method == 'POST' and registration_form.validate():
+    signup_form = SignupForm()
+
+    if request.method == 'POST' and signup_form.validate_on_submit():
+
+        user_id = signup_form.user_id
+        user_password = signup_form.user_password
+        user_name = signup_form.user_name
+
         user_data = User.query.filter_by(user_id=user_id).first()
+
         if not user_data:
             hashed_password = hashpw(user_password.encode('utf-8'), gensalt())
 
@@ -52,4 +56,4 @@ def signup():
             flash('이미 존재하는 아이디입니다. 다시 입력해 주세요.')
             return redirect(url_for('main.signup'))
     else:
-        return render_template('signup.html')
+        return render_template('signup.html', signup_form=signup_form)
