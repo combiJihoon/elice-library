@@ -9,11 +9,15 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    login_form = LoginForm(request.form)
-    user_id = login_form.user_id.data
-    user_password = login_form.user_password.data
-    if request.method == 'POST' and login_form.validate():
+    login_form = LoginForm()
+
+    if request.method == 'POST' and login_form.validate_on_submit():
+
+        user_id = login_form.user_id.data
+        user_password = login_form.user_password.data
+
         user_data = User.query.filter(user_id=user_id).first()
+
         if not user_data:
             flash('아이디를 다시 확인해 주세요.')
             return redirect(url_for('auth.login'))
@@ -26,7 +30,7 @@ def login():
             flash(f'{user_data.user_name}님 안녕하세요!')
             return redirect(url_for('main.home'))
     else:
-        return render_template('login.html')
+        return render_template('login.html', login_form=login_form)
 
 
 @bp.route('/signup', methods=['GET', 'POST'])
