@@ -29,6 +29,7 @@ class Book(db.Model):
     pages = db.Column(db.Integer, nullable=False)
     isbn = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text(), nullable=True)
+    link = db.Column(db.String(255), nullable=False)
     img_url = db.Column(db.String(255), nullable=True)
     stock = db.Column(db.Integer, nullable=False)
 
