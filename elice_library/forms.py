@@ -7,7 +7,7 @@ import re
 
 def user_name_check(form, field):
     message = '이름은 한글 또는 영문으로만 입력하세요.'
-    p = re.findall('^[A-Za-zㄱ-ㅣ가-힣]*$', filed.data)
+    p = re.findall('^[A-Za-zㄱ-ㅣ가-힣]*$', field.data)
     if not p:
         raise ValidationError(message)
 
@@ -44,4 +44,4 @@ class LoginForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    content = StringField("의견을 입력해 주세요.", [validors.Length(min=10, max=300)])
+    content = StringField("의견을 입력해 주세요.", validators=[Length(min=10, max=300)])
