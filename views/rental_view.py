@@ -55,7 +55,7 @@ def rented_data():
     else:
         user_id = session['user_id']
         rental_list = Rental.query.filter_by(
-            user_id=user_id, rented_at=None).order_by(Rental.rented_at.desc()).all()
+            user_id=user_id, returned_at=None).order_by(Rental.rented_at.desc()).all()
 
         return render_template('rented_list.html', rental_list=rental_list)
 
