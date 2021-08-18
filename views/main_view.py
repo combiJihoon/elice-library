@@ -13,4 +13,4 @@ def home():
 @bp.route('/detail/<int:book_id>', methods=['GET'])
 def book_detail(book_id):
     book = Book.query.filter_by(book_id=book_id).first()
-    return render_template('index.html', book=book)
+    return render_template('book_detail.html', book=book)
