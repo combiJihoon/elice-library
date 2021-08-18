@@ -9,15 +9,22 @@
 
 - [x] DB 설계
 - [x] API 설계  
-      :point_right: main_view, auth_view, myrental_view,comment_view
+       :point_right: main_view, auth_view, myrental_view,comment_view
 - [x] 스켈레톤 코드 작성
 
 **8월 17일 (화)**
 
-- [ ] 데이터 로드
-- [ ] 폼 생성
-- [ ] 로그인 기능 구현
-- [ ] nav bar 구현
+- [x] 데이터 로드
+- [x] 폼 생성
+- [x] 로그인 기능 구현
+- [x] nav bar 구현
+
+**8월 18일 (수))**
+
+- [ ] login, signup html 완성
+- [ ] 비밀번호 validator 구현
+- [ ] main 화면에 책 리스트 띄우기
+- [ ] myrental api 중 'rent' 구현
 
 ### :rocket: Todo List
 
