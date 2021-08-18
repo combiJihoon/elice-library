@@ -3,6 +3,8 @@ from models import Book, Rental
 from app import db
 from werkzeug.utils import redirect
 
+from datetime import datetime
+
 bp = Blueprint('rental', __name__, url_prefix='/rental')
 
 
@@ -14,8 +16,8 @@ def record():
     else:
         user_id = session['user_id']
         rental_list = Rental.query.filter_by(
-            user_id=user_id).all().order_by(Rental.rented_at.desc())
-        return render_template('record.html', rental_list=rental_list)
+            user_id=user_id).order_by(Rental.rented_at.desc()).all()
+        return render_template('rental_record.html', rental_list=rental_list)
 
 
 @bp.route('/<int:book_id>', methods=['GET', 'POST'])
@@ -42,3 +44,19 @@ def rent(book_id):
         else:
             flash('현재 대여 가능한 책이 없습니다.')
             return redirect(url_for('main.home'))
+
+
+@bp.route('/return/<int:book_id>', methods=['POST'])
+def return_book(book_id):
+    # 대여하기 기능은 로그인 된 유저만 볼 수 있음
+    user_id = session['user_id']
+    rental_data = Rental.query.filter_by(
+        book_id=book_id, user_id=user_id).first()
+    book_data = Book.query.filter_by(book_id=book_id).first()
+
+    rental_data.returned_at = datetime.today()
+    book_data.stock += 1
+
+    db.session.commit()
+
+    return render_template('rental_record.html')
