@@ -47,10 +47,19 @@ def rent(book_id):
             return redirect(url_for('main.home'))
 
 
+@bp.route('/return', methods=['GET'])
+def rented_data():
+    user_id = session['user_id']
+    rental_list = Rental.query.filter_by(
+        user_id=user_id, rented_at=None).order_by(Rental.rented_at.desc()).all()
+
+    return render_template('rented_list.html', rental_list=rental_list)
+
+
 @bp.route('/return/<int:book_id>', methods=['POST'])
 def return_book(book_id):
-    # 대여하기 기능은 로그인 된 유저만 볼 수 있음
     user_id = session['user_id']
+
     rental_data = Rental.query.filter_by(
         book_id=book_id, user_id=user_id).first()
     book_data = Book.query.filter_by(book_id=book_id).first()
@@ -60,4 +69,4 @@ def return_book(book_id):
 
     db.session.commit()
 
-    return redirect(url_for('rental.record'))
+    return redirect(url_for('rental.rented_data'))
