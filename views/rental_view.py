@@ -41,7 +41,7 @@ def rent(book_id):
                 db.session.add(rental)
                 db.session.commit()
 
-                return redirect(url_for('rental.record'))
+                return redirect(url_for('rental.rented_data'))
         else:
             flash('현재 대여 가능한 책이 없습니다.')
             return redirect(url_for('main.home'))
