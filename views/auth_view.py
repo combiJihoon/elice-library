@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, flash, session
+from flask import Blueprint, render_template, request, url_for, flash, session, g
 from werkzeug.utils import redirect
 from forms import LoginForm, SignupForm
 from bcrypt import checkpw, hashpw, gensalt
@@ -7,6 +7,15 @@ from models import User
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+@bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.get(user_id)
 
 
 @bp.route('/login', methods=['GET', 'POST'])
