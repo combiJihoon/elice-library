@@ -3,8 +3,9 @@
     {% if book_list %}
     <div class="book_container">
         {% for book in book_list %}
-        <a href="{{ url_for('main.home')}}">
+        <a href="{{ url_for('main.home') }}">
             <div class="book">
+                <img src="{{book.img_url}}" alt="{{book.book_name}}" />
                 <h2 class="title">{{book.book_name}}</h2>
                 <p class="date">{{book.rating}}</p>
                 <p class="stock">{{book.stock}}권 남음</p>
@@ -16,4 +17,5 @@
     <div class="blank">
         <p>아직 책이 없어요.</p>
     </div>
+    {% endif %}
 {% endblock content %}
