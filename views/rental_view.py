@@ -49,11 +49,15 @@ def rent(book_id):
 
 @bp.route('/return', methods=['GET'])
 def rented_data():
-    user_id = session['user_id']
-    rental_list = Rental.query.filter_by(
-        user_id=user_id, rented_at=None).order_by(Rental.rented_at.desc()).all()
+    if g.user is None:
+        flash('로그인 후 반납할 수 있습니다.')
+        return redirect(url_for('main.home'))
+    else:
+        user_id = session['user_id']
+        rental_list = Rental.query.filter_by(
+            user_id=user_id, rented_at=None).order_by(Rental.rented_at.desc()).all()
 
-    return render_template('rented_list.html', rental_list=rental_list)
+        return render_template('rented_list.html', rental_list=rental_list)
 
 
 @bp.route('/return/<int:book_id>', methods=['POST'])
@@ -61,7 +65,7 @@ def return_book(book_id):
     user_id = session['user_id']
 
     rental_data = Rental.query.filter_by(
-        book_id=book_id, user_id=user_id).first()
+        book_id=book_id, user_id=user_id, returned_at=None).first()
     book_data = Book.query.filter_by(book_id=book_id).first()
 
     rental_data.returned_at = datetime.today()
