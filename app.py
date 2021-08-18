@@ -22,9 +22,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
+    import models
+    import data
     # blueprint
-    from .views import main_view, auth_view, comment_view, myrental_view
-    from . import models
+    from views import main_view, auth_view, comment_view, myrental_view
 
     app.register_blueprint(main_view.bp)
     app.register_blueprint(auth_view.bp)
@@ -37,3 +38,7 @@ def create_app():
     '''
 
     return app
+
+
+if __name__ == '__main__':
+    create_app().run(debug=True)
