@@ -23,13 +23,13 @@
             <ul id="nav-right">
                 {% if g.user %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">대여기록</a>
+                    <a class="nav-link" href="{{ url_for('rental.record') }}">대여기록</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.logout')}}">로그아웃</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ url_for(rental.record) }}">
                         <button type="button" class="btn_post">
                             반납하기
                         </button>
