@@ -78,4 +78,5 @@ def signup():
 @bp.route('/logout', methods=['GET'])
 def logout():
     session.clear()
+    flash('로그아웃 되었습니다.')
     return redirect(url_for('main.home'))
