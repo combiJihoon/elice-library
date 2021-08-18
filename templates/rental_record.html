@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+{% block content %}
+    {% if rental_list %}
+        {% for rental in rental_list %}
+        <div class="book">
+            <a href="{{ url_for('main.book_detail', book_id=rental.book_id) }}">
+                <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
+            </a>
+            <div class="info">
+                <h3>{{rental.book.book_name}}</h3>
+                <P>별점 :{{rental.book.rating}}점</p>
+                <p>{{rental.rented_at.strftime('%Y-%M-%d')}}</p>
+                <a href="#">반납하기</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <p>아직 대여한 책이 없어요.</p>
+    {% endif %}
+{% endblock content %}
