@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, flash, session, g
+from flask import Blueprint, render_template, request, url_for, flash, session, g
 from models import Book, Rental
 from app import db
 from werkzeug.utils import redirect
@@ -16,11 +16,11 @@ def record():
     else:
         user_id = session['user_id']
         rental_list = Rental.query.filter_by(
-            user_id=user_id).order_by(Rental.rented_at.desc()).all()
+            user_id=user_id, returned_at=None).order_by(Rental.rented_at.desc()).all()
         return render_template('rental_record.html', rental_list=rental_list)
 
 
-@bp.route('/<int:book_id>', methods=['GET', 'POST'])
+@bp.route('/<int:book_id>', methods=['POST'])
 def rent(book_id):
     if g.user is None:
         flash('로그인 후 대여할 수 있습니다.')
@@ -59,4 +59,4 @@ def return_book(book_id):
 
     db.session.commit()
 
-    return render_template('rental_record.html')
+    return redirect(url_for('rental_record'))
