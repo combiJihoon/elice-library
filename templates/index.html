@@ -1,21 +1,25 @@
 {% extends './base.html' %}
 {% block content %}
     {% if book_list %}
-    <div class="book_container">
         {% for book in book_list %}
-        <a href="{{ url_for('main.home') }}">
-            <div class="book">
+        <div class="book">
+            <a href="{{ url_for('main.book_detail', book_id=book.book_id) }}">
                 <img src="{{book.img_url}}" alt="{{book.book_name}}" />
-                <h2 class="title">{{book.book_name}}</h2>
-                <p class="date">{{book.rating}}</p>
-                <p class="stock">{{book.stock}}권 남음</p>
+            </a>
+            <div class="info">
+                <h3>{{book.book_name}}</h3>
+                <P>별점 :{{book.rating}}점</p>
+                <p>{{book.stock}}권 남음</p>
+                <a href="#">대여하기</a>
             </div>
-        </a>
+        </div>
         {% endfor %}
-    </div>
     {% else %}
     <div class="blank">
         <p>아직 책이 없어요.</p>
     </div>
     {% endif %}
 {% endblock content %}
+
+
+
