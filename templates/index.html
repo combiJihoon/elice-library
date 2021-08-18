@@ -10,7 +10,7 @@
                 <h3>{{book.book_name}}</h3>
                 <P>별점 :{{book.rating}}점</p>
                 <p>{{book.stock}}권 남음</p>
-                <a href="#">대여하기</a>
+                <a href="{{ url_for('rental.rent', book_id=book.book_id) }}">대여하기</a>
             </div>
         </div>
         {% endfor %}
