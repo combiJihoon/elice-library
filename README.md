@@ -19,7 +19,7 @@
 - [x] 로그인 기능 구현
 - [x] nav bar 구현
 
-**8월 18일 (수))**
+**8월 18일 (수)**
 
 - [ ] login, signup html 완성
 - [ ] 비밀번호 validator 구현
