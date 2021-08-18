@@ -30,7 +30,7 @@ def rent(book_id):
         user_id = session['user_id']
         if book.stock > 0:
             has_already_rented = Rental.query.filter_by(
-                user_id=user_id, book_id=book.book_id).first()
+                user_id=user_id, book_id=book.book_id, rented_at=None).first()
             if has_already_rented:
                 flash('이미 대여중인 책은 중복 대여가 불가능합니다.')
                 return redirect(url_for('main.home'))
