@@ -1,0 +1,12 @@
+{% extends './base.html' %}
+
+{% block content %}
+    <p>책이름 {{book.book_name}}</p>
+    <p>출판사 {{book.publisher}}</p>
+    <p>저자 {{book.author}}</p>
+    <p>출간일 {{book.publicated_at}}</p>
+    <p>페이지수 {{book.pages}}</p>
+    <p>ISBN 코드 {{book.isbn}}</p>
+    <p>책 소개</p>
+    <p>{{book.description}}</p>
+{% endblock content %}
