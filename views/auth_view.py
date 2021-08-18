@@ -25,7 +25,7 @@ def login():
             return redirect(url_for('auth.login'))
         else:
             session.clear()
-            session['user_id'] = user_id
+            user_id = session['user_id']
             flash(f'{user_data.user_name}님 안녕하세요!')
             return redirect(url_for('main.home'))
     else:
