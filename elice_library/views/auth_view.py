@@ -35,13 +35,13 @@ def login():
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    signup_form = SignupForm()
+    form = SignupForm()
 
-    if request.method == 'POST' and signup_form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
 
-        user_id = signup_form.user_id
-        user_password = signup_form.user_password
-        user_name = signup_form.user_name
+        user_id = form.user_id
+        user_password = form.user_password
+        user_name = form.user_name
 
         user_data = User.query.filter_by(user_id=user_id).first()
 
@@ -56,7 +56,7 @@ def signup():
             flash('이미 존재하는 아이디입니다. 다시 입력해 주세요.')
             return redirect(url_for('main.signup'))
     else:
-        return render_template('signup.html', signup_form=signup_form)
+        return render_template('signup.html', form=form)
 
 
 @bp.route('/logout', methods=['GET'])
