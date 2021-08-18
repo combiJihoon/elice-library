@@ -25,12 +25,12 @@ def create_app():
     import models
     import data
     # blueprint
-    from views import main_view, auth_view, comment_view, myrental_view
+    from views import main_view, auth_view, comment_view, rental_view
 
     app.register_blueprint(main_view.bp)
     app.register_blueprint(auth_view.bp)
     app.register_blueprint(comment_view.bp)
-    app.register_blueprint(myrental_view.bp)
+    app.register_blueprint(rental_view.bp)
 
     '''
     # 오류 페이지 등록
