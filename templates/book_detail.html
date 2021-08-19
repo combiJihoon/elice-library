@@ -1,12 +1,42 @@
 {% extends './base.html' %}
 
 {% block content %}
-    <p>책이름 {{book.book_name}}</p>
-    <p>출판사 {{book.publisher}}</p>
-    <p>저자 {{book.author}}</p>
-    <p>출간일 {{book.publicated_at}}</p>
-    <p>페이지수 {{book.pages}}</p>
-    <p>ISBN 코드 {{book.isbn}}</p>
-    <p>책 소개</p>
-    <p>{{book.description}}</p>
+    {% if book %}
+        <div class="book-detail">
+            <p>책이름 {{book.book_name}}</p>
+            <p>출판사 {{book.publisher}}</p>
+            <p>저자 {{book.author}}</p>
+            <p>출간일 {{book.publicated_at}}</p>
+            <p>페이지수 {{book.pages}}</p>
+            <p>ISBN 코드 {{book.isbn}}</p>
+            <p>책 소개</p>
+            <p>{{book.description}}</p>
+        </div>
+        <div class="comment">
+            {% for comment in comment_list %}
+                <div class="comment-detail">
+                    <p>{{comment.user_id}}</p>
+                    <p>{{comment.content}}</p>
+                    <p>{{comment.rating}}</p>
+                    <p>{{comment.created_at}}</p>
+                    {% if g.user == session['user_id'] %}
+                        <a href="#">
+                            <button type="button" class="btn btn-primary">
+                                수정하기
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>    
+            {% endfor %}
+            {% if g.user %}
+            <form action="{{ url_for('comment.create', book_id=book.book_id) }}">
+                <input type="text" name="content" placeholder="리뷰를 작성하세요!" />
+                <input type="text" name="rating" placeholder="임시 별점입니다.">
+                <button type="submit" class="btn btn-primary">
+                    등록하기
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endblock content %}
