@@ -15,8 +15,8 @@ def record():
         return redirect(url_for('main.home'))
     else:
         user_id = session['user_id']
-        rental_list = Rental.query.filter_by(
-            user_id=user_id).order_by(Rental.rented_at.desc()).all()
+        rental_list = Rental.query.filter(
+            Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc()).all()
         return render_template('rental_record.html', rental_list=rental_list)
 
 
@@ -41,7 +41,7 @@ def rent(book_id):
                 db.session.add(rental)
                 db.session.commit()
 
-                return redirect(url_for('rental.rented_data'))
+                return redirect(url_for('rental.rented_now'))
         else:
             flash('현재 대여 가능한 책이 없습니다.')
             return redirect(url_for('main.home'))
@@ -73,4 +73,4 @@ def return_book(book_id):
 
     db.session.commit()
 
-    return redirect(url_for('rental.rented_data'))
+    return redirect(url_for('rental.rented_now'))
