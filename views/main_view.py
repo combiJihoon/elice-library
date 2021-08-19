@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g
 from werkzeug.utils import redirect
 from models import Book, Comment
+from app import db
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
@@ -27,6 +28,7 @@ def book_detail(book_id):
         return redirect(url_for('main.book_detail', book_id=book_id))
 
     else:
-        comment_list = Comment.query.order_by(Comment.created_at.desc()).all()
+        comment_list = Comment.query.filter_by(
+            book_id=book_id).order_by(Comment.created_at.desc()).all()
         book = Book.query.filter_by(book_id=book_id).first()
         return render_template('book_detail.html', book=book, comment_list=comment_list)
