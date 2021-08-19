@@ -1,20 +1,20 @@
 {% extends './base.html' %}
 
 {% block content %}
-    {% if book %}
-        <div class="book-detail">
-            <p>책이름 {{book.book_name}}</p>
-            <p>출판사 {{book.publisher}}</p>
-            <p>저자 {{book.author}}</p>
-            <p>출간일 {{book.publicated_at}}</p>
-            <p>페이지수 {{book.pages}}</p>
-            <p>ISBN 코드 {{book.isbn}}</p>
-            <p>책 소개</p>
-            <p>{{book.description}}</p>
-        </div>
-        <div class="comment">
-            {% for comment in comment_list %}
-                <div class="comment-detail">
+    <div class="book-detail">
+        <p>책이름 {{book.book_name}}</p>
+        <p>출판사 {{book.publisher}}</p>
+        <p>저자 {{book.author}}</p>
+        <p>출간일 {{book.publicated_at}}</p>
+        <p>페이지수 {{book.pages}}</p>
+        <p>ISBN 코드 {{book.isbn}}</p>
+        <p>책 소개</p>
+        <p>{{book.description}}</p>
+    </div>
+    <div class="comment">
+        <div class="comment-detail">
+            {% if comment_list %}
+                {% for comment in comment_list %}
                     <p>{{comment.user_id}}</p>
                     <p>{{comment.content}}</p>
                     <p>{{comment.rating}}</p>
@@ -26,17 +26,20 @@
                             </button>
                         </a>
                     {% endif %}
-                </div>    
-            {% endfor %}
-            {% if g.user %}
-            <form action="{{ url_for('comment.create', book_id=book.book_id) }}">
-                <input type="text" name="content" placeholder="리뷰를 작성하세요!" />
-                <input type="text" name="rating" placeholder="임시 별점입니다.">
-                <button type="submit" class="btn btn-primary">
-                    등록하기
-                </button>
-            </form>
+                {% endfor %}
+            {% else %}
+                <p>리뷰를 작성해 주세요.</p>
             {% endif %}
         </div>
-    {% endif %}
+
+        {% if g.user %}
+        <form action="{{ url_for('main.book_detail', book_id=book.book_id) }}" method="post">
+            <input type="text" name="content" placeholder="리뷰를 작성하세요!" />
+            <input type="text" name="rating" placeholder="임시 별점입니다.">
+            <button type="submit" class="btn btn-primary">
+                등록하기
+            </button>
+        </form>
+        {% endif %}
+    </div>
 {% endblock content %}
