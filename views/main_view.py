@@ -23,8 +23,22 @@ def book_detail(book_id):
             content = request.form['content']
             comment = Comment(user_id=user_id, book_id=book_id,
                               rating=rating, content=content)
+
             db.session.add(comment)
             db.session.commit()
+
+            # rating update
+            rows = Comment.query.filter_by(
+                book_id=book_id).all()
+            if len(rows) != 0:
+                rating_sum = 0
+                for row in rows:
+                    rating_sum += row.rating
+                avg_rating = round(rating_sum / len(rows))
+                book = Book.query.filter_by(book_id=book_id).first()
+                book.rating = avg_rating
+                db.session.commit()
+
         return redirect(url_for('main.book_detail', book_id=book_id))
 
     else:
