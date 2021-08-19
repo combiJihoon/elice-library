@@ -29,7 +29,7 @@
                     <a class="nav-link" href="{{ url_for('auth.logout')}}">로그아웃</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('rental.rented_data') }}">
+                    <a href="{{ url_for('rental.rented_now') }}">
                         <button type="button" class="btn_post">
                             반납하기
                         </button>
@@ -53,7 +53,7 @@
         </div>
         {% endfor %}
     </div>
-    <div id="book-container">
+    <div id="container">
         {% block content %}{% endblock content %}
     </div>
     <div id="footer">

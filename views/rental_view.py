@@ -48,7 +48,7 @@ def rent(book_id):
 
 
 @bp.route('/return', methods=['GET'])
-def rented_data():
+def rented_now():
     if g.user is None:
         flash('로그인 후 반납할 수 있습니다.')
         return redirect(url_for('main.home'))
