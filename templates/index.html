@@ -1,9 +1,12 @@
 {% extends './base.html' %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+{% endblock js %}
 {% block content %}
     {% if book_list %}
         {% for book in book_list %}
         <div class="book">
-            <a href="{{ url_for('main.book_detail', book_id=book.book_id) }}">
+            <a href="{{ url_for('main.detail', book_id=book.book_id) }}" >
                 <img src="{{book.img_url}}" alt="{{book.book_name}}" />
                 <div class="info">
                 <h3>{{book.book_name}}</h3>

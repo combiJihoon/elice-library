@@ -1,5 +1,10 @@
 {% extends './base.html' %}
-
+{% block js %}
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+{% endblock js %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='book_detail.css') }}" />
+{% endblock style %}
 {% block content %}
     <div class="book-detail">
         <p>책이름 {{book.book_name}}</p>
@@ -31,12 +36,22 @@
                 <p>리뷰를 작성해 주세요.</p>
             {% endif %}
         </div>
-
         {% if g.user %}
-        <form action="{{ url_for('main.book_detail', book_id=book.book_id) }}" method="post">
-            <input type="text" name="content" placeholder="리뷰를 작성하세요!" />
-            <input type="text" name="rating" placeholder="임시 별점입니다.">
-            <button type="submit" class="btn btn-primary">
+        <form action="{{ url_for('main.create_comment', book_id=book.book_id)}}" method="post">
+            <textarea id='comment-content' class="form-control" rows="3" name="content" placeholder="리뷰를 작성하세요!"></textarea>
+            <div class="rating">
+                <input type="radio" name="rating" id="rating-5" value="5">
+                <label for="rating-5"></label>
+                <input type="radio" name="rating" id="rating-4" value="4">
+                <label for="rating-4"></label>
+                <input type="radio" name="rating" id="rating-3" value="3">
+                <label for="rating-3"></label>
+                <input type="radio" name="rating" id="rating-2" value="2">
+                <label for="rating-2"></label>
+                <input type="radio" name="rating" id="rating-1" value="1">
+                <label for="rating-1"></label>
+            </div>
+            <button class="btn btn-primary" onclick="postComment('{{ book.book_id }}')">
                 등록하기
             </button>
         </form>
