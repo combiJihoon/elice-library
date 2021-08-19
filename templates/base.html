@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}" />
     <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='test.js') }}"></script>
     {% block style %}{% endblock style %}
     {% block script %}{% endblock script %}
     <title>레이서 도서관</title>
@@ -54,7 +55,7 @@
         </div>
         {% endfor %}
     </div>
-    <div id="container">
+    <div id="content">
         {% block content %}{% endblock content %}
     </div>
     <div id="footer">
@@ -62,7 +63,8 @@
             <p>레이서 도서관</p>
         </div>
     </div>
-    {% block jscontent %}{% endblock jscontent %}
+    {% block jscontent %}
+    {% endblock jscontent %}
 </body>
 
 </html>

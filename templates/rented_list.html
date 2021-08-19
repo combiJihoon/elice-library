@@ -4,7 +4,7 @@
 <p>{{rental_list|length}}권의 대여기록이 있습니다.</p>
 {% for rental in rental_list %}
 <div class="book">
-    <a href="{{ url_for('main.book_detail', book_id=rental.book_id) }}">
+    <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
         <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
     </a>
     <div class="info">

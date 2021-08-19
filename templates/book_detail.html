@@ -1,11 +1,11 @@
 {% extends './base.html' %}
-{% block js %}
-    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
-{% endblock js %}
 {% block style %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='book_detail.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock style %}
+
 {% block content %}
+<div class="container">
     <div class="book-detail">
         <p>책이름 {{book.book_name}}</p>
         <p>출판사 {{book.publisher}}</p>
@@ -22,8 +22,15 @@
                 {% for comment in comment_list %}
                     <p>{{comment.user_id}}</p>
                     <p>{{comment.content}}</p>
-                    <p>{{comment.rating}}</p>
                     <p>{{comment.created_at}}</p>
+                    <div class="rating-result" data="{{comment.rating}}">
+                        {% for i in range(comment.rating) %}
+                            <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in range(5 - (comment.rating)) %}
+                            <span class="fa fa-star"></span>
+                        {% endfor %}
+                    </div>
                     {% if session['user_id'] == comment.user_id %}
                         <form action="#" method="post">
                             <button type="button" class="btn btn-primary">
@@ -32,8 +39,6 @@
                         </form>
                     {% endif %}
                 {% endfor %}
-            {% else %}
-                <p>리뷰를 작성해 주세요.</p>
             {% endif %}
         </div>
         {% if g.user %}
@@ -51,10 +56,11 @@
                 <input type="radio" name="rating" id="rating-1" value="1">
                 <label for="rating-1"></label>
             </div>
-            <button class="btn btn-primary" onclick="postComment('{{ book.book_id }}')">
+            <button type="submit" class="btn btn-primary">
                 등록하기
             </button>
         </form>
         {% endif %}
     </div>
+</div>
 {% endblock content %}
