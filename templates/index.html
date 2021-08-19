@@ -5,9 +5,9 @@
         <div class="book">
             <a href="{{ url_for('main.book_detail', book_id=book.book_id) }}">
                 <img src="{{book.img_url}}" alt="{{book.book_name}}" />
-            </a>
-            <div class="info">
+                <div class="info">
                 <h3>{{book.book_name}}</h3>
+            </a>
                 <P>별점 :{{book.rating}}점</p>
                 <p>{{book.stock}}권 남음</p>
                 <form action="{{ url_for('rental.rent', book_id=book.book_id) }}" method="post">
