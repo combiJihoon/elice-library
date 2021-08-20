@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, RadioField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 import re
 
-from authorization import signUpPwCheck, loginPwMinLength
+from authentication import signUpPwCheck, loginPwMinLength
 
 
 def name_validate(form, field):
@@ -26,6 +26,12 @@ def password_login_validate(form, field):
         raise ValidationError(message)
 
 
+def rating_validate(form, field):
+    message = '평점을 입력해 주세요.'
+    if field.data is None:
+        raise ValidationError(message)
+
+
 class SignupForm(FlaskForm):
     user_id = StringField("elice@elice.com", validators=[
                           DataRequired("아이디는 필수로 입력해야 합니다."), Email("이메일 형식으로 입력해야 합니다.")])
@@ -45,4 +51,5 @@ class LoginForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    content = StringField("의견을 입력해 주세요.", validators=[Length(min=10, max=300)])
+    content = TextAreaField("의견을 입력해 주세요.", validators=[
+                            DataRequired("리뷰를 필수로 입력해야 합니다.")])

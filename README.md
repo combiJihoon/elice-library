@@ -40,8 +40,6 @@
 - [x] API documentation 설계
 - [x] Pagination 구현
 
-### 데이터베이스 설계
-
 ### :rocket: Todo List
 
 - **로그인**

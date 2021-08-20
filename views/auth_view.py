@@ -4,7 +4,7 @@ from forms import LoginForm, SignupForm
 from bcrypt import checkpw, hashpw, gensalt
 from app import db
 from models import User
-import config
+from flask_login import login_user
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -50,8 +50,6 @@ def login():
 def signup():
     form = SignupForm()
     if request.method == 'POST' and form.validate_on_submit():
-        if request.form.getlist['remember'].value == 'remember-me':
-            config.session.permanent = True
         user_id = form.user_id.data
         user_password = form.user_password.data
         user_name = form.user_name.data
