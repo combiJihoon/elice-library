@@ -42,7 +42,7 @@
 
 ### 데이터베이스 설계
 
-![데이터베이스](./erd.png)
+<img src="./erd.png" width="500">
 
 ### :rocket: Todo List
 
