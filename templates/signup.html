@@ -8,165 +8,42 @@
     <div class="signup">
         <h1>Sign up</h1>
         <form class="signup-form" action="{{ url_for('auth.signup') }}" method="post">
+            {{form.csrf_token}}
+            {% for field, errors in form.errors.items() %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ form[field].label }}</strong>: {{ ', '.join(errors) }}
+            </div>
+            {% endfor %}
             <div class="form-group">
                 <label for="signup-email">아이디</label>
                 <input type="email" id="signup-email" class="form-control" placeholder="elice@elice.com"
-                     name="user_id" />
+                     name="user_id" value={{form.user_id.data or ''}} />
             </div>
             <div class="form-group">
                 <label for="signup-name">이름</label>
                 <input type="text" id="signup-name" class="form-control" placeholder="이름을 입력하세요."
-                     name="user_name"/>
+                     name="user_name" value={{form.user_name.data or ''}} />
             </div>
             <div class="form-group">
                 <label for="signup-password">비밀번호</label>
                 <input type="password" id="signup-password" class="form-control" placeholder="비밀번호를 입력하세요."
-                     name="user_password"/>
-                <div class="reveal-password">
-                    <svg class="icon">
-                        <use xlink:href="#reveal-icon"></use>
-                    </svg>
-                </div>
-                <div id="password-suggestion" class="suggestion"></div>
+                     name="user_password" value={{form.user_password.data or ''}} />
             </div>
             <div class="form-group">
                 <label for="signup-password">비밀번호 확인</label>
                 <input type="password" id="signup-password" class="form-control" placeholder="비밀번호를 다시 한 번 입력하세요."
-                     name="user_password2" />
-                <div class="reveal-password">
-                    <svg class="icon">
-                        <use xlink:href="#reveal-icon"></use>
-                    </svg>
-                </div>
-                <div id="password-suggestion" class="suggestion"></div>
+                     name="user_password2" value={{form.user_password2.data or ''}} />
             </div>
-            <button class="signup_btn form-submit" type="submit">Sign up</button>
+            <button class="signup_btn form-submit" type="submit">가입하기</button>
 
         </form>
     </div>
     <!-- /Signup -->
-
-    <!-- SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" display="none">
-        <symbol id="reveal-icon" viewBox="0 0 932.15 932.15">
-            <g>
-                <path
-                    d="M466.075,161.525c-205.6,0-382.8,121.2-464.2,296.1c-2.5,5.3-2.5,11.5,0,16.9c81.4,174.899,258.601,296.1,464.2,296.1   s382.8-121.2,464.2-296.1c2.5-5.3,2.5-11.5,0-16.9C848.875,282.725,671.675,161.525,466.075,161.525z M466.075,676.226   c-116.1,0-210.1-94.101-210.1-210.101c0-116.1,94.1-210.1,210.1-210.1c116.1,0,210.1,94.1,210.1,210.1   S582.075,676.226,466.075,676.226z" />
-                <circle cx="466.075" cy="466.025" r="134.5" />
-            </g>
-        </symbol>
-    </svg>
-    <!-- /SVG -->
+</div>
+<div class="password-rule">
+    <ul>
+        <li>비밀번호는 영문, 숫자, 특수문자 중 2종류 이상을 조합하여 최소 10자리 이상으로 구성할 수 있습니다.</li>
+        <li>또는 3종류 영문, 숫자, 특수문자 중 3종류 이상을 조합하여 최소 8자리 이상의 길이로 구성</li>
+    </ul>
 </div>
 {% endblock content %}
-
-{% block jscontent %}
-<script>
-/*------------------------------
-Floating Labels & Check Inputs
-------------------------------*/
-function floatingLabels() {
-var $formControl = $('.form-control');
-
-$formControl.each(function() {
-var $t = $(this),
-$p = $t.parents('.form-group');
-
-$t.on('keyup change', function() {
-if ($(this).val().length > 0) {
-$p.addClass('filled');
-} else {
-$p.removeClass('filled');
-}
-}).on('focus', function() {
-$p.addClass('focus');
-}).on('blur', function() {
-$p.removeClass('focus');
-if ($t.val().length <= 1) { $p.addClass('error'); } else { $p.removeClass('error'); } }); });
-    } /*----------------------- Reveal & Check Password -----------------------*/ function revealPassword() { var
-    $reveal=$('.reveal-password'), $password=$('#signup-password'), $pwdSuggestion=$('#password-suggestion');
-    $password.on('keyup change', function() { var $t=$(this), $p=$t.parents('.form-group'), val=$t.val(),
-    result=zxcvbn(val, userInputs=[]); if (val.length> 0) {
-    $reveal.show();
-    $pwdSuggestion.show();
-
-    if (parseInt(result.score) > 2) {
-    $pwdSuggestion.html('');
-    $p.removeClass('error');
-    } else {
-    if (result.feedback.warning == '') {
-    result.feedback.warning = 'Your password is too short';
-    }
-    $p.addClass('error');
-    $pwdSuggestion.html(result.feedback.warning + '. ' + result.feedback.suggestions.join(' '));
-    }
-    } else {
-    $pwdSuggestion.hide();
-    }
-
-    });
-
-    $reveal.click(function() {
-    var $t = $(this),
-    $p = $t.parents('.form-group');
-
-    $t.toggleClass('active');
-    $p.toggleClass('focus');
-
-    var type = ($(this).is('.active')) ? 'text' : 'password';
-    $password.attr('type', type);
-    });
-    }
-
-    /*-----------------
-    Email Suggestion
-    -----------------*/
-    function emailSuggestion() {
-    var domains = 'yahoo.com outlook.com google.com hotmail.com inbox.com gmail.com me.com aol.com mac.com lycos.com
-    live.com comcast.net googlemail.com msn.com hotmail.co.uk yahoo.co.uk facebook.com verizon.net sbcglobal.net att.net
-    gmx.com mail.com'.split(' '),
-    topLevelDomains = 'co.uk com net org info edu gov mil'.split(' '),
-    $email = $('#signup-email'),
-    $suggestion = $('#email-suggestion'),
-    $suggestedEmail = $('#suggested-email');
-
-    $email.on('blur', function() {
-    var $t = $(this),
-    $p = $t.parents('.form-group');
-
-    // check if it's an email
-    var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-    if (pattern.test($t.val()) == false) {
-    $p.addClass('error');
-    } else {
-    $p.removeClass('error');
-    }
-
-    $t.mailcheck({
-    domains: domains,
-    topLevelDomains: topLevelDomains,
-    suggested: function(element, suggestion) {
-    $suggestion.slideDown(300);
-    $suggestedEmail.html('<a id="suggested-email"><span class="address">' + suggestion.address + '</span>@<span
-            class="domain">' + suggestion.domain + '</span></a>');
-    }
-    });
-    });
-
-    // recover
-    $suggestedEmail.click(function() {
-    $email.val($(this).text());
-    $suggestion.slideUp(300);
-    });
-    }
-
-    /*--------
-    DOC READY
-    ----------*/
-    $(function() {
-    floatingLabels();
-    revealPassword();
-    emailSuggestion();
-    });
-</script>
-{% endblock jscontent %}

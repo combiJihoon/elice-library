@@ -43,36 +43,29 @@ def login():
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST':
-        user_id = request.form['user_id']
-        user_password = request.form['user_password']
-        user_password2 = request.form['user_password2']
-        user_name = request.form['user_name']
-        # user_id = form.user_id
-        # user_password = form.user_password
-        # user_name = form.user_name
+    form = SignupForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        user_id = form.user_id.data
+        user_password = form.user_id.data
+        user_name = form.user_id.data
 
         user_data = User.query.filter_by(user_id=user_id).first()
 
         # 아이디 중복 확인 후 회원가입 시작
         if not user_data:
-            if user_password != user_password2:
-                flash('비밀번호를 다시 확인하세요.')
-                return redirect(url_for('auth.signup'))
-            else:
-                hashed_password = hashpw(
-                    user_password.encode('utf-8'), gensalt())
+            hashed_password = hashpw(
+                user_password.encode('utf-8'), gensalt())
 
-                new_user = User(user_id=user_id,
-                                user_password=hashed_password, user_name=user_name)
-                db.session.add(new_user)
-                db.session.commit()
-                return redirect(url_for('main.home'))
+            new_user = User(user_id=user_id,
+                            user_password=hashed_password, user_name=user_name)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('main.home'))
         else:
             flash('이미 존재하는 아이디입니다. 다시 입력해 주세요.')
             return redirect(url_for('auth.signup'))
     else:
-        return render_template('signup.html')
+        return render_template('signup.html', form=form)
 
 
 @bp.route('/logout', methods=['GET'])
