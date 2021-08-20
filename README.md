@@ -42,8 +42,6 @@
 
 ### 데이터베이스 설계
 
-<img src="./erd.png" width="500">
-
 ### :rocket: Todo List
 
 - **로그인**
