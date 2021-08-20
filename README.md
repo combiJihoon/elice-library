@@ -40,6 +40,10 @@
 - [x] API documentation 설계
 - [x] Pagination 구현
 
+### ERD
+
+![erd](/uploads/a0fe35434b4c868b588942b4cf252f07/erd.png)
+
 ### :rocket: Todo List
 
 - **로그인**
