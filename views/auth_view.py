@@ -20,14 +20,18 @@ def load_logged_in_user():
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        user_id = request.form['user_id']
-        user_password = request.form['user_password']
+    form = LoginForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        user_id = form.user_id.data
+        user_password = form.user_password.data
 
         user_data = User.query.filter_by(user_id=user_id).first()
 
         if not user_data:
             flash('아이디를 다시 확인해 주세요.')
+            return redirect(url_for('auth.login'))
+        elif len(user_password) < 8:
+            flash('비밀번호는 8자리 이상 입력해야 합니다.')
             return redirect(url_for('auth.login'))
         elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
             flash('비밀번호가 일치하지 않습니다.')
@@ -38,7 +42,7 @@ def login():
             flash(f'{user_data.user_name}님 안녕하세요!')
             return redirect(url_for('main.home'))
     else:
-        return render_template('login.html')
+        return render_template('login.html', form=form)
 
 
 @bp.route('/signup', methods=['GET', 'POST'])
@@ -46,8 +50,8 @@ def signup():
     form = SignupForm()
     if request.method == 'POST' and form.validate_on_submit():
         user_id = form.user_id.data
-        user_password = form.user_id.data
-        user_name = form.user_id.data
+        user_password = form.user_password.data
+        user_name = form.user_name.data
 
         user_data = User.query.filter_by(user_id=user_id).first()
 
