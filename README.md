@@ -29,9 +29,15 @@
 **8월 19일 (목)**
 
 - [x] 코멘트 api 구현
+- [x] 코멘트 평점 평균으로 책 평점 저장
 - [x] 책 소개 페이지 수정
-- [ ] 비밀번호 validator 구현
-- [ ] 전체 UI 수정(별점 모양 생성)
+
+**8월 19일 (목)**
+
+- [x] 별점 ui 생성
+- [x] 비밀번호 validator 구현
+- [ ] 코멘트 delete, modify 구현
+- [ ] API documentation 설계
 
 ### :rocket: Todo List
 
