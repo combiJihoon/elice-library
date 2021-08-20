@@ -244,9 +244,9 @@ Temporary Items
 
 # Made myself
 .python-version
-.db
+library.db
 config
 config.py
 migrations
 run.sh
-.csv
+library.csv
