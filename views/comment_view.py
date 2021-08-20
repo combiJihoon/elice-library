@@ -1,25 +1,19 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g
 from werkzeug.utils import redirect
 from models import Book, Comment, User
+from forms import CommentForm
+from app import db
 
 bp = Blueprint('comment', __name__, url_prefix='/comment')
 
 
-# @bp.route('/<int:book_id>', methods=['GET', 'POST'])
-# def create(book_id):
-#     if request.method == 'POST':
-#         if g.user is None:
-#             flash('로그인 후 사용할 수 있습니다.')
-#         else:
-#             user_id = session['user_id']
-#             rating = request.form['rating']
-#             content = request.form['content']
-#             comment = Comment(user_id=user_id, book_id=book_id,
-#                               rating=rating, content=content)
-#             db.session.add(comment)
-#             db.session.commit()
-#         return redirect(url_for('main.book_detail', book_id=book_id))
+@bp.route('/delete', methods=['POST'])
+def delete(comment_id):
+    comment = Comment.query.filter_by(comment_id=comment_id).first()
+    book_id = comment.book_id
 
-#     else:
-#         comment_list = Comment.query.order_by(Comment.created_at.desc()).all()
-#         return render_template('book_detail.html', comment_list=comment_list)
+    db.session.delete(comment)
+    db.session.commit()
+
+    flash('정상적으로 삭제 되었습니다.')
+    return redirect(url_for('main.detail', book_id=book_id))
