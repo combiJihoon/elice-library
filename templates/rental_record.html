@@ -3,19 +3,28 @@
     {% if rental_list %}
         <p>총 {{rental_list|length}}권의 대여기록이 있습니다.</p>
         {% for rental in rental_list %}
-        <div class="book">
-            <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
-                <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
-            </a>
-            <div class="info">
-                <h3>{{rental.book.book_name}}</h3>
-                <P>별점 :{{rental.book.rating}}점</p>
-                <p>{{rental.rented_at.strftime('%Y-%M-%d')}} ~</p>
-                <p>{{rental.returned_at}}</p>
+        <div class="book-container">
+            <div class="book">
+                <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
+                    <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
+                </a>
+                <div class="info">
+                    <h3>{{rental.book.book_name}}</h3>
+                    <div class="rating-result" data="{{rental.book.rating}}">
+                        {% for i in range(rental.book.rating) %}
+                        <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in range(5 - (rental.book.rating)) %}
+                        <span class="fa fa-star"></span>
+                        {% endfor %}
+                    </div>
+                    <p>{{rental.rented_at.strftime('%Y-%M-%d')}} ~</p>
+                    <p>{{rental.returned_at}}</p>
+                </div>
             </div>
-        </div>
-        {% endfor %}
-    {% else %}
-    <p>아직 대여한 책이 없어요.</p>
-    {% endif %}
+            {% endfor %}
+        {% else %}
+        <p>아직 대여한 책이 없어요.</p>
+        {% endif %}
+    </div>
 {% endblock content %}
