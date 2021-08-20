@@ -1,15 +1,20 @@
 {% extends './base.html' %}
 {% block content %}
+<div class="total-record">
+    <p>총 {{rental_list|length}}권의 대여기록이 있습니다.</p>
+</div>
+<div class="container">
     {% if rental_list %}
-        <p>총 {{rental_list|length}}권의 대여기록이 있습니다.</p>
         {% for rental in rental_list %}
         <div class="book-container">
             <div class="book">
                 <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
+                    <div class="book-img">
                     <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
+                    </div>
                 </a>
                 <div class="info">
-                    <h3>{{rental.book.book_name}}</h3>
+                    <h5>{{rental.book.book_name}}</h5>
                     <div class="rating-result" data="{{rental.book.rating}}">
                         {% for i in range(rental.book.rating) %}
                         <span class="fa fa-star checked"></span>
@@ -22,9 +27,11 @@
                     <p>{{rental.returned_at}}</p>
                 </div>
             </div>
-            {% endfor %}
-        {% else %}
+        </div>
+        {% endfor %}
+    {% else %}
         <p>아직 대여한 책이 없어요.</p>
-        {% endif %}
-    </div>
+    {% endif %}
+</div>
+
 {% endblock content %}

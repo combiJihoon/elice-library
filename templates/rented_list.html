@@ -1,24 +1,31 @@
 {% extends './base.html' %}
 {% block content %}
-{% if rental_list %}
-<p>{{rental_list|length}}권의 대여기록이 있습니다.</p>
-{% for rental in rental_list %}
-<div class="book-container">
-    <div class="book">
-        <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
-            <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
-        </a>
-        <div class="info">
-            <h3>{{rental.book.book_name}}</h3>
-            <div class="rating-result" data="{{rental.book.rating}}">
-                {% for i in range(rental.book.rating) %}
-                <span class="fa fa-star checked"></span>
-                {% endfor %}
-                {% for i in range(5 - (rental.book.rating)) %}
-                <span class="fa fa-star"></span>
-                {% endfor %}
+<div class="total-record">
+    <p>총 {{rental_list|length}}권의 대여기록이 있습니다.</p>
+</div>
+<div class="container">
+    {% if rental_list %}
+    {% for rental in rental_list %}
+    <div class="book-container">
+        <div class="book">
+            <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
+                <div class="book-img">
+                    <img src="{{rental.book.img_url}}" alt="{{rental.book.book_name}}" />
+                </div>
+            </a>
+            <div class="info">
+                <h5>{{rental.book.book_name}}</h5>
+                <div class="rating-result" data="{{rental.book.rating}}">
+                    {% for i in range(rental.book.rating) %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% for i in range(5 - (rental.book.rating)) %}
+                    <span class="fa fa-star"></span>
+                    {% endfor %}
+                </div>
+                <p>{{rental.rented_at.strftime('%Y-%M-%d')}}</p>
+
             </div>
-            <p>{{rental.rented_at.strftime('%Y-%M-%d')}}</p>
             <form action="{{ url_for('rental.return_book', book_id=rental.book_id) }}" method="post">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">반납하기</button>
             </form>
@@ -26,7 +33,7 @@
     </div>
     {% endfor %}
     {% else %}
-        <p>대여한 책이 없어요.</p>
+        <p>아직 대여한 책이 없어요.</p>
     {% endif %}
 </div>
 {% endblock content %}
