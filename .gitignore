@@ -249,3 +249,4 @@ config
 config.py
 migrations
 run.sh
+.csv

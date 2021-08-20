@@ -30,7 +30,7 @@ def push_data():
                     publication_date = datetime.datetime.strptime(
                         lines['publication_date'], '%Y-%m-%d')
                     book = Book(book_name=lines['book_name'], publisher=lines['publisher'], author=lines['author'], publicated_at=publication_date, pages=int(
-                        lines['pages']), isbn=int(lines['isbn']), description=lines['description'], link=lines['link'], stock=10, rating=0)
+                        lines['pages']), img_url=img_url, isbn=int(lines['isbn']), description=lines['description'], link=lines['link'], stock=10, rating=0)
                     db.session.add(book)
                     db.session.commit()
             db.create_all(app=app)

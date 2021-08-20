@@ -8,7 +8,9 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/', methods=['GET'])
 def home():
-    book_list = Book.query.order_by(Book.book_id.asc()).all()
+    page = request.args.get('page', type=int, default=1)
+    book_list = Book.query.order_by(Book.book_id.asc())
+    book_list = book_list.paginate(page, per_page=8)
     return render_template('index.html', book_list=book_list)
 
 
@@ -21,10 +23,6 @@ def create_comment(book_id):
         user_id = session['user_id']
         content = request.form['content']
         rating = request.form['rating']
-        # data = request.get_json()
-        # book_id = data['book_id']
-        # content = data['content']
-        # rating = data['rating']
 
         comment = Comment(user_id=user_id, book_id=book_id,
                           rating=rating, content=content)
