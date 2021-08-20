@@ -37,7 +37,8 @@
 - [x] 별점 ui 생성
 - [x] 비밀번호 validator 구현
 - [ ] 코멘트 delete, modify 구현
-- [ ] API documentation 설계
+- [x] API documentation 설계
+- [x] Pagination 구현
 
 ### :rocket: Todo List
 
