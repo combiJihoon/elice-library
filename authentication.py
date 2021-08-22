@@ -2,10 +2,7 @@ import string
 
 
 def login_pw_min_length(pw):
-    if len(pw) >= 8:
-        return True
-    else:
-        return False
+    return len(pw) >= 8
 
 
 def signup_pw_check(pw):
