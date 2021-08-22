@@ -26,7 +26,7 @@
                 <p>{{rental.rented_at.strftime('%Y-%M-%d')}}</p>
 
             </div>
-            <form action="{{ url_for('rental.return_book', book_id=rental.book_id) }}" method="post">
+            <form class="btn_rent" action="{{ url_for('rental.return_book', book_id=rental.book_id) }}" method="post">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">반납하기</button>
             </form>
         </div>

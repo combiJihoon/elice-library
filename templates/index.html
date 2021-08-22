@@ -21,9 +21,10 @@
                     <div class="book-img">
                         <img src="{{book.img_url}}" alt="{{book.book_name}}" />
                     </div>
-                </a>
                 <div class="info">
-                    <h5>{{book.book_name}}</h5>
+                    <a href="{{ url_for('main.detail', book_id=book.book_id) }}">
+                        <h5>{{book.book_name}}</h5>
+                    </a>
                     <p>{{book.stock}}권 남음</p>
                     <div class="rating-result" data="{{book.rating}}">
                         {% for i in range(book.rating) %}

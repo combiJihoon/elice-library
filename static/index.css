@@ -170,6 +170,11 @@ body {
     transition: all 0.2s;
 }
 
+.btn_rent {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+}
 
 #content {
     margin-top: 160px;
@@ -240,14 +245,20 @@ body {
     text-align: center;
 }
 
+.book .info p {
+    text-align: center;
+}
+
 .book-img {
     text-align: center;
+    height: 240px;
+    margin-top: 20px;
 }
 
 .book img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    width: 220px;
+    width: 160px;
 }
 
 #pagination-nav {
@@ -349,4 +360,9 @@ body {
 
 span.checked {
     color: rgb(64, 31, 211);
+}
+
+
+.total-record {
+    margin-left: 100px;
 }
