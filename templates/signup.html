@@ -26,30 +26,15 @@
                 <input type="text" id="signup-name" class="form-control" placeholder="이름을 입력하세요."
                      name="user_name" />
             </div>
-            {% for error in form.user_name.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-            {% endfor %}
             <div class="form-group">
                 <label for="signup-password">비밀번호</label>
                 <input type="password" id="signup-password" class="form-control" placeholder="비밀번호를 입력하세요." name="user_password" />
             </div>
-            {% for error in form.user_password.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-            {% endfor %}
             <div class="form-group">
                 <label for="signup-password">비밀번호 확인</label>
                 <input type="password" id="signup-password" class="form-control" placeholder="비밀번호를 다시 한 번 입력하세요."
-                     name="user_password2" />
+                     name="user_password_check" />
             </div>
-            {% for error in form.user_password2.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-            {% endfor %}
             <button class="signup_btn form-submit" type="submit">가입하기</button>
 
         </form>
