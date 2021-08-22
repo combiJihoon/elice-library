@@ -21,33 +21,34 @@ def create_comment(book_id):
         flash('로그인 후 사용할 수 있습니다.')
         return redirect(url_for('main.detail', book_id=book_id))
     else:
-        form = CommentForm()
-        if form.validate_on_submit():
-            user_id = session['user_id']
+        user_id = session['user_id']
+        content = request.form['content']
+        try:
+            rating = request.form['rating']
+        except:
+            rating = 0
 
-            content = form.content.data
-            try:
-                rating = request.form['rating']
-            except:
-                rating = 0
+        if content is None:
+            flash('내용을 입력해 주세요!')
+            return redirect(url_for('main.detail', book_id=book_id))
 
-            comment = Comment(user_id=user_id, book_id=book_id,
-                              rating=rating, content=content)
+        comment = Comment(user_id=user_id, book_id=book_id,
+                          rating=rating, content=content)
 
-            db.session.add(comment)
+        db.session.add(comment)
+        db.session.commit()
+
+        # rating update
+        rows = Comment.query.filter_by(
+            book_id=book_id).all()
+        if len(rows) != 0:
+            rating_sum = 0
+            for row in rows:
+                rating_sum += row.rating
+            avg_rating = round(rating_sum / len(rows))
+            book = Book.query.filter_by(book_id=book_id).first()
+            book.rating = avg_rating
             db.session.commit()
-
-            # rating update
-            rows = Comment.query.filter_by(
-                book_id=book_id).all()
-            if len(rows) != 0:
-                rating_sum = 0
-                for row in rows:
-                    rating_sum += row.rating
-                avg_rating = round(rating_sum / len(rows))
-                book = Book.query.filter_by(book_id=book_id).first()
-                book.rating = avg_rating
-                db.session.commit()
 
         return redirect(url_for('main.detail', book_id=book_id))
 

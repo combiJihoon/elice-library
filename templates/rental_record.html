@@ -1,4 +1,13 @@
 {% extends './base.html' %}
+{% block flash %}
+<div id="flash" class="return-record-flash">
+    {% for message in get_flashed_messages() %}
+    <div class="flash alert alert-info">
+        {{message}}
+    </div>
+    {% endfor %}
+</div>
+{% endblock flash %}
 {% block content %}
 <div class="total-record">
     <p>총 {{rental_list|length}}권의 대여기록이 있습니다.</p>
