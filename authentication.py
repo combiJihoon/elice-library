@@ -1,7 +1,7 @@
 import string
 
 
-def login_pw_min_length(pw):
+def login_pw_min_length(pw: str) -> bool:
     return len(pw) >= 8
 
 
