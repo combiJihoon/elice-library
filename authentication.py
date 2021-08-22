@@ -1,14 +1,14 @@
 import string
 
 
-def loginPwMinLength(pw):
+def login_pw_min_length(pw):
     if len(pw) >= 8:
         return True
     else:
         return False
 
 
-def signUpPwCheck(pw):
+def signup_pw_check(pw):
     nums = string.digits
     letters = string.ascii_letters
     special_symbols = '!@#$%^&*'
