@@ -1,13 +1,12 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g
 from werkzeug.utils import redirect
 from models import Book, Comment, User
-from forms import CommentForm
 from app import db
 
 bp = Blueprint('comment', __name__, url_prefix='/comment')
 
 
-@bp.route('/delete', methods=['POST'])
+@bp.route('/delete/<int:comment_id>', methods=['POST'])
 def delete(comment_id):
     comment = Comment.query.filter_by(comment_id=comment_id).first()
     book_id = comment.book_id

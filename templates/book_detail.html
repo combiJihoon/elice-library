@@ -46,7 +46,7 @@
                             </button>
                         </form>
                         <form action="{{ url_for('comment.delete', comment_id=comment.comment_id) }}" method="post">
-                            <button type="button" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 삭제
                             </button>
                         </form>
@@ -55,15 +55,9 @@
             {% endif %}
         </div>
         {% if g.user %}
-        {% for error in form.content.errors %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-        {% endfor %}
         <form action="{{ url_for('main.create_comment', book_id=book.book_id)}}" method="post">
-            {{ form.csrf_token }}
             <textarea id='comment-content' class="form-control" rows="3" name="content"
-                placeholder="리뷰를 작성하세요!">{{form.content.data or ''}}</textarea>
+                placeholder="리뷰를 작성하세요!"></textarea>
             <div class="rating">
                 <input type="radio" name="rating" id="rating-5" value="5">
                 <label for="rating-5"></label>
