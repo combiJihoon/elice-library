@@ -1,5 +1,13 @@
 {% extends './base.html' %}
 {% block content %}
+<div class="total-record">
+    <div class="search-container">
+        <form action="{{ url_for('main.home') }}" method="get">
+            <input type="text" placeholder="책을 검색하세요!" name="search">
+            <button id="search-btn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
 <div class="container">
     {% if book_list %}
         {% for book in book_list.items %}

@@ -10,8 +10,17 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/', methods=['GET'])
 def home():
+    # search가 있을 경우
+    search = request.args.get('search')
+    if search is not None:
+        search = "%{}%".format(search)
+        book_list = Book.query.filter(Book.book_name.like(
+            search)).order_by(Book.book_id.asc())
+
+    else:
+        book_list = Book.query.order_by(Book.book_id.asc())
+
     page = request.args.get('page', type=int, default=1)
-    book_list = Book.query.order_by(Book.book_id.asc())
     book_list = book_list.paginate(page, per_page=8)
     return render_template('index.html', book_list=book_list)
 
