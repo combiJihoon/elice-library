@@ -12,39 +12,65 @@
 </div>
 {% endblock flash %}
 {% block content %}
-<div class="container">
-    <div class="book-detail">
-        <p>책이름 {{book.book_name}}</p>
-        <p>출판사 {{book.publisher}}</p>
-        <p>저자 {{book.author}}</p>
-        <p>출간일 {{book.publicated_at}}</p>
-        <p>페이지수 {{book.pages}}</p>
-        <p>ISBN 코드 {{book.isbn}}</p>
-        <p>책 소개</p>
+<div class="detail-container">
+    <div class="intro-box">
+        <div class="intro-img">
+            <img src="{{ img_url }}" alt="img of '{{ book.book_name}}'">
+        </div>
+        <div class="book-detail">
+            <table>
+                <tr>
+                    <td class="index">책이름</td>
+                    <td class="explain">{{ book.book_name }}</td>
+                </tr>
+                <tr>
+                    <td class="index">출판사</td>
+                    <td class="explain">{{ book.publisher }}</td>
+                </tr>
+                <tr>
+                    <td class="index">저자</td>
+                    <td class="explain">{{ book.author }}</td>
+                </tr>
+                <tr>
+                    <td class="index">출간일</td>
+                    <td class="explain">{{ book.publicated_at.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                <tr>
+                    <td class="index">페이지수</td>
+                    <td class="explain">{{ book.pages }}</td>
+                </tr>
+                <tr>
+                    <td class="index">ISBN 코드</td>
+                    <td class="explain">{{ book.isbn }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="desc-box">
         <p>{{book.description}}</p>
     </div>
     <div class="comment">
         <div class="comment-detail">
             {% if comment_list %}
-                {% for comment in comment_list %}
-                    <p>{{comment.user_id}}</p>
-                    <p>{{comment.content}}</p>
-                    <p>{{comment.created_at}}</p>
-                    <div class="rating-result" data="{{comment.rating}}">
-                        {% for i in range(comment.rating) %}
+                {% for i in range(comment_list|length) %}
+                    <p>{{comment_list[i].user_id}}</p>
+                    <p>{{comment_list[i].content}}</p>
+                    <p>{{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
+                    <div class="rating-result" data="{{comment_list[i].rating}}">
+                        {% for i in range(comment_list[i].rating) %}
                             <span class="fa fa-star checked"></span>
                         {% endfor %}
-                        {% for i in range(5 - (comment.rating)) %}
+                        {% for i in range(5 - (comment_list[i].rating)) %}
                             <span class="fa fa-star"></span>
                         {% endfor %}
                     </div>
-                    {% if session['user_id'] == comment.user_id %}
+                    {% if session['user_id'] == comment_list[i].user_id %}
                         <form action="#" method="post">
                             <button type="button" class="btn btn-primary">
                                 수정
                             </button>
                         </form>
-                        <form action="{{ url_for('comment.delete', comment_id=comment.comment_id) }}" method="post">
+                        <form action="{{ url_for('comment.delete', comment_id=comment_list[i].comment_id) }}" method="post">
                             <button type="submit" class="btn btn-primary">
                                 삭제
                             </button>

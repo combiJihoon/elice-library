@@ -3,6 +3,57 @@
     margin: 0 auto;
 }
 
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 200px;
+}
+
+.intro-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.intro-img {
+    text-align: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #ffff;
+    border-radius: 10px;
+}
+
+.intro-img {
+    width: 300px;
+}
+.intro-img img {
+    width: 200px;
+}
+
+.book-detail {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.book-detail table {
+    border-collapse: collapse;
+}
+
+.book-detail table tbody {
+    border: 1px solid black;
+    background-color: #ffff;
+}
+
+.book-detail table td {
+    border-left: 1px solid black;
+}
+
+.book-detail table .index {
+    width: 150px;
+}
+
+.book-detail table .explain {
+    width: 400px;
+}
 /* .rating {
     display: flex;
     width: 100%;
