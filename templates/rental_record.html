@@ -1,19 +1,16 @@
 {% extends './base.html' %}
-{% block flash %}
-<div id="flash" class="return-record-flash">
-    {% for message in get_flashed_messages() %}
-    <div class="flash alert alert-info">
-        {{message}}
-    </div>
-    {% endfor %}
-</div>
-{% endblock flash %}
 {% block content %}
 <div class="total-record">
     <p>총 {{rental_list.items|length}}권의 대여기록이 있습니다.</p>
+  <div class="search-container">
+      <form action="{{ url_for('rental.record') }}" method="get">
+          <input type="text" placeholder="책을 검색하세요!" name="search">
+          <button id="search-btn" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+  </div>
 </div>
 <div class="container">
-    {% if rental_list %}
+    {% if rental_list %}     
         {% for i in range(rental_list.items|length) %}
             <div class="book-container">
                 <div class="book">
@@ -46,10 +43,9 @@
                     </div>
                 </div>
             </div>
-
         {% endfor %}
     {% else %}
-        <p>아직 대여한 책이 없어요.</p>
+        <p class="no-record">아직 대여한 책이 없어요.</p>
     {% endif %}
 </div>
 <nav id="pagination-nav" aria-label="Page navigation example">

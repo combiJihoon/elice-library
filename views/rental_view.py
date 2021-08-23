@@ -15,8 +15,17 @@ def record():
         return redirect(url_for('main.home'))
     else:
         user_id = session['user_id']
-        rental_list = Rental.query.filter(
-            Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc())
+
+        # search가 있을 경우
+        search = request.args.get('search')
+        if search is not None:
+            search = "%{}%".format(search)
+            rental_list = Rental.query.join(Book).filter(
+                Rental.user_id == user_id, Rental.returned_at != None, Book.book_name.like(search)).order_by(Rental.rented_at.desc())
+
+        else:
+            rental_list = Rental.query.filter(
+                Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc())
 
         img_urls = []
         for rental in rental_list:
