@@ -195,6 +195,8 @@ body {
 }
 
 .book {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     width: 280px;
     height: 500px;
@@ -238,6 +240,23 @@ body {
     font-family: Jua;
     text-decoration: none;
 }
+ 
+.book-title {
+    height: 60px;
+}
+.book-title h5 {
+    margin: 0 20px;
+    text-align: center;
+}
+
+/* .book-info {
+    margin-top: 30px;
+} */
+
+.book-info p{
+    text-align: center;
+    margin-top: 30px;
+}
 
 .book .info {
     padding: 20px;
@@ -252,7 +271,7 @@ body {
 .book-img {
     text-align: center;
     height: 240px;
-    margin-top: 20px;
+    margin: 20px;
 }
 
 .book img {
@@ -354,6 +373,10 @@ body {
     transform: translateY(-500px);
 }
 
+.rating-result {
+    text-align: center;
+    margin-bottom: 10px;
+}
 .rating-result span {
     color: rgb(173, 170, 170)
 }

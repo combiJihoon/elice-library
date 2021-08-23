@@ -22,8 +22,12 @@
                             <img src="{{ img_urls[i] }}" alt="{{rental_list.items[i].book.book_name}}" />
                         </div>
                     </a>
-                    <div class="info">
-                        <h5>{{rental_list.items[i].book.book_name}}</h5>
+                    <div class="book-title">
+                        <a href="{{ url_for('main.detail', book_id=rental_list.items[i].book_id) }}">
+                            <h5>{{rental_list.items[i].book.book_name}}</h5>
+                        </a>
+                    </div>
+                    <div class="book-info">
                         <div class="rating-result" data="{{rental_list.items[i].book.rating}}">
                             {% for j in range(rental_list.items[i].book.rating) %}
                             <span class="fa fa-star checked"></span>
@@ -32,8 +36,13 @@
                             <span class="fa fa-star"></span>
                             {% endfor %}
                         </div>
-                        <p>{{rental_list.items[i].rented_at.strftime('%Y-%M-%d')}} ~</p>
-                        <p>{{rental_list.items[i].returned_at}}</p>
+
+                        <p>
+                        {{rental_list.items[i].rented_at.strftime('%Y-%M-%d')}}<br>
+                        ~<br>
+                        {{rental_list.items[i].returned_at}}
+                        </p>
+                        
                     </div>
                 </div>
             </div>

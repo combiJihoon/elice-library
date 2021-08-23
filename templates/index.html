@@ -21,11 +21,12 @@
                     <div class="book-img">
                         <img src="{{book.img_url}}" alt="{{book.book_name}}" />
                     </div>
-                <div class="info">
+                <div class="book-title">
                     <a href="{{ url_for('main.detail', book_id=book.book_id) }}">
                         <h5>{{book.book_name}}</h5>
                     </a>
-                    <p>{{book.stock}}권 남음</p>
+                </div>
+                <div class="book-info">
                     <div class="rating-result" data="{{book.rating}}">
                         {% for i in range(book.rating) %}
                         <span class="fa fa-star checked"></span>
@@ -34,10 +35,12 @@
                         <span class="fa fa-star"></span>
                         {% endfor %}
                     </div>
+                    <p>{{book.stock}}권 남음</p>
+                    <form class="btn_rent" action="{{ url_for('rental.rent', book_id=book.book_id) }}"
+                        method="post">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">대여하기</button>
+                    </form>
                 </div>
-                <form class="btn_rent" action="{{ url_for('rental.rent', book_id=book.book_id) }}" method="post">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">대여하기</button>
-                </form>
             </div>
         </div>
         {% endfor %}
