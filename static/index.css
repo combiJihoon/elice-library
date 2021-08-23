@@ -93,13 +93,13 @@ body {
 
 
 #flash {
-    margin-top: 60px;
+    margin-top: 80px;
 }
 
 .flash {
     position: absolute;
     right: 120px;
-    width: 400px;
+    width: 450px;
     -webkit-animation: flip-out-hor-top 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     animation: 0.45s flip-out-hor-top 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
