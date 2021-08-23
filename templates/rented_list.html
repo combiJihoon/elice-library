@@ -27,9 +27,9 @@
                             <span class="fa fa-star"></span>
                             {% endfor %}
                         </div>
-                        <p>{{rental_list.items[i].rented_at.strftime('%Y-%M-%d')}}</p>
-                        <form class="btn_rent" action="{{ url_for('rental.return_book', book_id=rental_list.items[i].book.book_id) }}" method="post">
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">반납하기</button>
+                        <p>{{rental_list.items[i].rented_at.strftime('%Y-%m-%d')}}</p>
+                        <form class="return-btn" action="{{ url_for('rental.return_book', book_id=rental_list.items[i].book.book_id) }}" method="post">
+                            <button id="return-btn" type="submit">반납하기</button>
                         </form>
                     </div>
                 </div>
