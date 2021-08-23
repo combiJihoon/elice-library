@@ -7,6 +7,11 @@
     display: flex;
     flex-direction: column;
     margin: 0 200px;
+    border: 1px solid black;
+    padding: 100px 100px;
+    background-color: #ffff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .intro-box {
@@ -22,10 +27,23 @@
 }
 
 .intro-img {
-    width: 300px;
+    width: 350px;
 }
 .intro-img img {
     width: 200px;
+}
+
+.desc {
+    margin-top: 100px;
+    margin-left: 20px;
+    font: 20px bold;
+}
+
+.desc-box {
+    margin-top: 10px;
+    padding: 20px 50px;
+    height: 300px;
+    border: 1px solid black;
 }
 
 .book-detail {
@@ -54,6 +72,98 @@
 .book-detail table .explain {
     width: 400px;
 }
+
+.comment-container {
+    padding: 40px 40px;
+}
+
+.comment-box {
+    box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px,
+    rgb(0 0 0 / 24%) 0px 1px 2px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#comment-rating {
+    display: flex;
+    margin-left: auto;
+}
+
+.comment-header {
+    display: flex;
+    justify-items: flex-end;
+}
+
+.comment-update {
+    margin-right: 10px;
+}
+
+.comment-update-delete {
+    display: flex;
+    margin-left: auto;
+}
+
+#comment-btn {
+    background: darkrgb(12, 123, 226);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 3px 3px;
+    width: 50px;
+}
+
+#comment-btn:hover {
+    color: #ccc;
+    background-color: rgb(12, 35, 170);
+    transition: all 0.2s;
+}
+
+
+.comment-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.comment-create {
+    display: flex;
+    justify-content: center;
+}
+
+.comment-content {
+    width: 750px;
+    margin-bottom: 10px;
+}
+
+.comment-create-footer {
+    display: flex;
+    justify-items: flex-end;
+}
+
+.create-comment-btn {
+    background-color: rgb(98, 240, 209);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 3px 3px;
+    width: 100px;
+    height: 40px;
+    margin-left: auto;
+}
+
+.create-comment-btn:hover {
+    color: #ccc;
+    background-color: rgb(12, 35, 170);
+    transition: all 0.2s;
+}
+
+.rating {
+    width: 150px;
+    height: 40px;
+}
+
+
 /* .rating {
     display: flex;
     width: 100%;

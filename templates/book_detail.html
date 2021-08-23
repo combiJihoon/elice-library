@@ -46,59 +46,74 @@
             </table>
         </div>
     </div>
+    <p class="desc">책 소개</p>
     <div class="desc-box">
         <p>{{book.description}}</p>
     </div>
-    <div class="comment">
-        <div class="comment-detail">
+    <p class="desc">리뷰</p>
+    <div class="comment-container">
             {% if comment_list %}
                 {% for i in range(comment_list|length) %}
-                    <p>{{comment_list[i].user_id}}</p>
-                    <p>{{comment_list[i].content}}</p>
-                    <p>{{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
-                    <div class="rating-result" data="{{comment_list[i].rating}}">
-                        {% for i in range(comment_list[i].rating) %}
-                            <span class="fa fa-star checked"></span>
-                        {% endfor %}
-                        {% for i in range(5 - (comment_list[i].rating)) %}
-                            <span class="fa fa-star"></span>
-                        {% endfor %}
+                    <div class="comment-box">
+                        <div class="comment-header">
+                            <p class="comment-user">{{comment_list[i].user_id}}</p>
+                            <div class="comment-update-delete">
+                                {% if session['user_id'] == comment_list[i].user_id %}
+                                <form action="#" method="post">
+                                    <button type="button" id="comment-btn"class="comment-update">
+                                        수정
+                                    </button>
+                                </form>
+                                <form action="{{ url_for('comment.delete', comment_id=comment_list[i].comment_id) }}"
+                                    method="post">
+                                    <button type="submit" id="comment-btn" class="comment-delete">
+                                        삭제
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <p class="comment-content">{{comment_list[i].content}}</p>
+                        <div class="comment-footer">
+                            <p class="comment-date">
+                                {{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
+                            <div id="comment-rating" class="rating-result" data="{{comment_list[i].rating}}">
+                                {% for i in range(comment_list[i].rating) %}
+                                <span class="fa fa-star checked"></span>
+                                {% endfor %}
+                                {% for i in range(5 - (comment_list[i].rating)) %}
+                                <span class="fa fa-star"></span>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
-                    {% if session['user_id'] == comment_list[i].user_id %}
-                        <form action="#" method="post">
-                            <button type="button" class="btn btn-primary">
-                                수정
-                            </button>
-                        </form>
-                        <form action="{{ url_for('comment.delete', comment_id=comment_list[i].comment_id) }}" method="post">
-                            <button type="submit" class="btn btn-primary">
-                                삭제
-                            </button>
-                        </form>
-                    {% endif %}
                 {% endfor %}
             {% endif %}
         </div>
         {% if g.user %}
-        <form action="{{ url_for('main.create_comment', book_id=book.book_id)}}" method="post">
-            <textarea id='comment-content' class="form-control" rows="3" name="content"
-                placeholder="리뷰를 작성하세요!"></textarea>
-            <div class="rating">
-                <input type="radio" name="rating" id="rating-5" value="5">
-                <label for="rating-5"></label>
-                <input type="radio" name="rating" id="rating-4" value="4">
-                <label for="rating-4"></label>
-                <input type="radio" name="rating" id="rating-3" value="3">
-                <label for="rating-3"></label>
-                <input type="radio" name="rating" id="rating-2" value="2">
-                <label for="rating-2"></label>
-                <input type="radio" name="rating" id="rating-1" value="1">
-                <label for="rating-1"></label>
-            </div>
-            <button type="submit" class="btn btn-primary">
-                등록하기
-            </button>
-        </form>
+        <div class="comment-create">
+            <form action="{{ url_for('main.create_comment', book_id=book.book_id)}}" method="post">
+                <textarea id='comment-content' class="comment-content" rows="3" name="content"
+                    placeholder="리뷰를 작성하세요!"></textarea>
+                <div class="comment-create-footer">
+                    <div class="rating">
+                        <input type="radio" name="rating" id="rating-5" value="5">
+                        <label for="rating-5"></label>
+                        <input type="radio" name="rating" id="rating-4" value="4">
+                        <label for="rating-4"></label>
+                        <input type="radio" name="rating" id="rating-3" value="3">
+                        <label for="rating-3"></label>
+                        <input type="radio" name="rating" id="rating-2" value="2">
+                        <label for="rating-2"></label>
+                        <input type="radio" name="rating" id="rating-1" value="1">
+                        <label for="rating-1"></label>
+                    </div>
+                    <button type="submit" class="create-comment-btn">
+                        등록하기
+                    </button>
+                </div>
+            </form>
+        </div>
         {% endif %}
     </div>
 </div>
