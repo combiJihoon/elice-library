@@ -16,8 +16,14 @@ def record():
     else:
         user_id = session['user_id']
         rental_list = Rental.query.filter(
-            Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc()).all()
-        return render_template('rental_record.html', rental_list=rental_list)
+            Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc())
+
+        img_urls = []
+        for rental in rental_list:
+            img_urls.append('.' + rental.book.img_url)
+
+        rental_list = rental_list.all()
+        return render_template('rental_record.html', rental_list=rental_list, img_urls=img_urls)
 
 
 @bp.route('/<int:book_id>', methods=['POST'])
@@ -55,9 +61,15 @@ def rented_now():
     else:
         user_id = session['user_id']
         rental_list = Rental.query.filter_by(
-            user_id=user_id, returned_at=None).order_by(Rental.rented_at.desc()).all()
+            user_id=user_id, returned_at=None).order_by(Rental.rented_at.desc())
 
-        return render_template('rented_list.html', rental_list=rental_list)
+        img_urls = []
+        for rental in rental_list:
+            img_urls.append('.' + rental.book.img_url)
+
+        rental_list = rental_list.all()
+
+        return render_template('rented_list.html', rental_list=rental_list, img_urls=img_urls)
 
 
 @bp.route('/return/<int:book_id>', methods=['POST'])
