@@ -42,7 +42,7 @@
 
 ### ERD
 
-![erd](/uploads/a0fe35434b4c868b588942b4cf252f07/erd.png)
+![erd](./erd.png)
 
 ### :rocket: Todo List
 
