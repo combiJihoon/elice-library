@@ -42,7 +42,7 @@
 
 ### ERD
 
-![erd](https://github.com/combiJihoon/elice-library/issues/1#issue-977070987)
+![erd](./erd.png)
 
 ### :rocket: Todo List
 
