@@ -5,35 +5,33 @@
 </div>
 <div class="container">
     {% if rental_list %}
-    {% for rental in rental_list %}
-        {% for img_url in img_urls %}
+        {% for i in range(rental_list|length) %}
             <div class="book-container">
                 <div class="book">
-                    <a href="{{ url_for('main.detail', book_id=rental.book_id) }}">
+                    <a href="{{ url_for('main.detail', book_id=rental_list[i].book_id) }}">
                         <div class="book-img">
-                            <img src="{{ img_url }}" alt="{{rental.book.book_name}}" />
+                            <img src="{{ img_urls[i] }}" alt="{{rental_list[i].book.book_name}}" />
                         </div>
                     </a>
                     <div class="info">
-                        <h5>{{rental.book.book_name}}</h5>
-                        <div class="rating-result" data="{{rental.book.rating}}">
-                            {% for i in range(rental.book.rating) %}
+                        <h5>{{rental_list[i].book.book_name}}</h5>
+                        <div class="rating-result" data="{{rental_list[i].book.rating}}">
+                            {% for j in range(rental_list[i].book.rating) %}
                             <span class="fa fa-star checked"></span>
                             {% endfor %}
-                            {% for i in range(5 - (rental.book.rating)) %}
+                            {% for j in range(5 - (rental_list[i].book.rating)) %}
                             <span class="fa fa-star"></span>
                             {% endfor %}
                         </div>
-                        <p>{{rental.rented_at.strftime('%Y-%M-%d')}}</p>
+                        <p>{{rental_list[i].rented_at.strftime('%Y-%M-%d')}}</p>
 
                     </div>
-                    <form class="btn_rent" action="{{ url_for('rental.return_book', book_id=rental.book_id) }}" method="post">
+                    <form class="btn_rent" action="{{ url_for('rental.return_book', book_id=rental_list[i].book.book_id) }}" method="post">
                         <button class="btn btn-lg btn-primary btn-block" type="submit">반납하기</button>
                     </form>
                 </div>
             </div>
         {% endfor %}
-    {% endfor %}
     {% else %}
         <p>아직 대여한 책이 없어요.</p>
     {% endif %}
