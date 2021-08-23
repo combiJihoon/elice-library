@@ -49,6 +49,7 @@ def rent(book_id):
                 db.session.add(rental)
                 db.session.commit()
 
+                flash('성공적으로 대여 되었습니다.')
                 return redirect(url_for('rental.rented_now'))
         else:
             flash('현재 대여 가능한 책이 없습니다.')
@@ -88,4 +89,5 @@ def return_book(book_id):
 
     db.session.commit()
 
+    flash('반납이 완료 되었습니다.')
     return redirect(url_for('rental.rented_now'))

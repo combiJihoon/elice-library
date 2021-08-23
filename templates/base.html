@@ -48,8 +48,13 @@
             </ul>
         </nav>
     </header>
-    {% block flash %}
-    {% endblock flash %}
+    <div id="flash" >
+        {% for message in get_flashed_messages() %}
+        <div class="flash alert alert-info">
+            {{message}}
+        </div>
+        {% endfor %}
+    </div>
     <div id="content">
         {% block content %}{% endblock content %}
     </div>

@@ -1,8 +1,9 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g, jsonify
 from werkzeug.utils import redirect
 from models import Book, Comment
-from forms import CommentForm
 from app import db
+
+import pytz
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
@@ -50,6 +51,7 @@ def create_comment(book_id):
             book.rating = avg_rating
             db.session.commit()
 
+        flash('리뷰가 성공적으로 작성되었습니다.')
         return redirect(url_for('main.detail', book_id=book_id))
 
 
@@ -57,8 +59,18 @@ def create_comment(book_id):
 def detail(book_id):
     # data = request.get_json()
     # book_id = request.form['book_id']
-    form = CommentForm()
     comment_list = Comment.query.filter_by(
-        book_id=book_id).order_by(Comment.created_at.desc()).all()
+        book_id=book_id).order_by(Comment.created_at.desc())
     book = Book.query.filter_by(book_id=book_id).first()
-    return render_template('book_detail.html', book=book, comment_list=comment_list, form=form)
+
+    img_url = '.' + book.img_url
+
+    created_times = []
+    for comment in comment_list:
+        created_time = comment.created_at
+        created_times.append(created_time.astimezone(
+            pytz.timezone("Asia/Seoul")))
+
+    comment_list = comment_list.all()
+
+    return render_template('book_detail.html', book=book, comment_list=comment_list, created_times=created_times, img_url=img_url)

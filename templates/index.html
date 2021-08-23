@@ -1,16 +1,4 @@
 {% extends './base.html' %}
-{% block js %}
-    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
-{% endblock js %}
-{% block flash %}
-    <div id="flash" class="index-flash">
-        {% for message in get_flashed_messages() %}
-        <div class="flash alert alert-info">
-            {{message}}
-        </div>
-        {% endfor %}
-    </div>
-{% endblock flash %}
 {% block content %}
 <div class="container">
     {% if book_list %}
