@@ -22,7 +22,9 @@ def record():
         for rental in rental_list:
             img_urls.append('.' + rental.book.img_url)
 
-        rental_list = rental_list.all()
+        page = request.args.get('page', type=int, default=1)
+        rental_list = rental_list.paginate(page, per_page=8)
+
         return render_template('rental_record.html', rental_list=rental_list, img_urls=img_urls)
 
 
@@ -67,7 +69,8 @@ def rented_now():
         for rental in rental_list:
             img_urls.append('.' + rental.book.img_url)
 
-        rental_list = rental_list.all()
+        page = request.args.get('page', type=int, default=1)
+        rental_list = rental_list.paginate(page, per_page=8)
 
         return render_template('rented_list.html', rental_list=rental_list, img_urls=img_urls)
 
