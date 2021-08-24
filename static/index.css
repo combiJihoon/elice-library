@@ -475,6 +475,13 @@ span.checked {
     margin-top: 10px;
 }
 
+.login-box a {
+    color: #3e3e3e;
+}
+
+.login-box a:hover {
+    color: rgb(12, 35, 170);
+}
 
 #signup {
     display: flex;
@@ -533,9 +540,15 @@ span.checked {
     padding: 150px 100px;
 }
 
+.password-rule h5 {
+    /* margin-left: 80px */
+    opacity: 0.9;
+}
+
 .password-rule p {
     /* margin-left: 80px */
     background-color: beige;
+    opacity: 0.8;
 }
 
 .return-btn {
@@ -559,4 +572,31 @@ span.checked {
     opacity: 0.7;
     transition: all 0.5s;
     transform: scale(1.05);
+}
+
+.total-record {
+    display: flex;
+}
+
+.search-container {
+    margin-left: auto;
+    margin-right: 90px;
+    margin-bottom: 30px;
+}
+
+.search-container input {
+    width: 300px;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 14px;
+}
+
+#search-btn {
+    border: none;
+    background: none;
+    transform: scale(1.5);
+}
+
+#search-btn:hover {
+    transform: scale(1.8);
 }
