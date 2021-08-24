@@ -47,6 +47,12 @@
 - [x] API documentation 설계
 - [x] 검색 기능 구현(추가 구현)
 
+**8월 24일 (화)**
+
+- [x] layout 변경(배포 목적)
+- [x] img_url 경로 변경(명시적 경로)
+- [x] 세부 UI 추가 변경
+
 ### ERD
 
 ![erd](./erd.png)
