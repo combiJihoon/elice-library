@@ -1,8 +1,8 @@
 # book_name, publisher, author, publication_date, pages, isbn, description, link(img_url)
 import csv
 import datetime
-from app import db, create_app
-from models import Book
+from elice_library import db, create_app
+from .models import Book
 
 
 app = create_app()
