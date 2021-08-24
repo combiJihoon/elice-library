@@ -202,6 +202,8 @@
     border-radius: 10px;
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
     background: #f2f5f3;
+    margin: 0 40px;
+
 }
 
 .login-for-review {

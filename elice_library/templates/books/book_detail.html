@@ -50,44 +50,38 @@
     </div>
     <p class="desc">리뷰</p>
     <div class="comment-container">
-            {% if comment_list %}
-                {% for i in range(comment_list|length) %}
-                    <div class="comment-box">
-                        <div class="comment-header">
-                            <p class="comment-user">{{comment_list[i].user_id}}</p>
-                            <div class="comment-update-delete">
-                                {% if session['user_id'] == comment_list[i].user_id %}
-                                <form action="#" method="post">
-                                    <button type="button" id="comment-btn"class="comment-update">
-                                        수정
-                                    </button>
-                                </form>
-                                <button id="comment-btn" class="comment-delete"
-                                    data-id="{{ comment_list[i].comment_id }}">
-                                    삭제
-                                </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="comment-content-box">
-                            <p class="comment-content">{{comment_list[i].content}}</p>
-                        </div>
-                        <div class="comment-footer">
-                            <p class="comment-date">
-                                {{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
-                            <div id="comment-rating" class="rating-result" data="{{comment_list[i].rating}}">
-                                {% for i in range(comment_list[i].rating) %}
-                                <span class="fa fa-star checked"></span>
-                                {% endfor %}
-                                {% for i in range(5 - (comment_list[i].rating)) %}
-                                <span class="fa fa-star"></span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if comment_list %}
+        {% for i in range(comment_list|length) %}
+        <div class="comment-box">
+            <div class="comment-header">
+                <p class="comment-user">{{comment_list[i].user_id}}</p>
+                <div class="comment-update-delete">
+                    {% if session['user_id'] == comment_list[i].user_id %}
+                    <button id="comment-btn" class="comment-delete" data-id="{{ comment_list[i].comment_id }}">
+                        삭제
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="comment-content-box">
+                <p class="comment-content">{{comment_list[i].content}}</p>
+            </div>
+            <div class="comment-footer">
+                <p class="comment-date">
+                    {{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
+                <div id="comment-rating" class="rating-result" data="{{comment_list[i].rating}}">
+                    {% for i in range(comment_list[i].rating) %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% for i in range(5 - (comment_list[i].rating)) %}
+                    <span class="fa fa-star"></span>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
+        {% endfor %}
+        {% endif %}
+    </div>
         {% if g.user %}
         <div class="comment-create">
             <form action="{{ url_for('main.create_comment', book_id=book.book_id)}}" method="post">
