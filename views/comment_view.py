@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for, flash, session, g
+from flask import Blueprint, request, render_template, url_for, flash, session, g, jsonify
 from werkzeug.utils import redirect
 from models import Book, Comment, User
 from app import db
@@ -6,18 +6,15 @@ from app import db
 bp = Blueprint('comment', __name__, url_prefix='/comment')
 
 
-@bp.route('/delete/<int:comment_id>', methods=['POST'])
-def delete(comment_id):
+@bp.route('/delete', methods=['POST'])
+def delete():
+    comment_id = request.form['comment_id']
     comment = Comment.query.filter_by(comment_id=comment_id).first()
-    book_id = comment.book_id
 
     db.session.delete(comment)
     db.session.commit()
 
-    flash('정상적으로 삭제 되었습니다.')
-    return redirect(url_for('main.detail', book_id=book_id))
-
-
+    return jsonify({"message": "정상적으로 삭제 되었습니다."})
 # @bp.route('/update/<int:comment_id>', methods=['GET'])
 # def update_try(comment_id):
 
