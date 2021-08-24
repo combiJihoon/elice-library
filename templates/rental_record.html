@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 {% block content %}
 <div class="total-record">
-    <p>총 {{rental_list.items|length}}권의 대여기록이 있습니다.</p>
+    <p>총 {{ rental_list.total }}권의 대여기록이 있습니다.</p>
   <div class="search-container">
       <form action="{{ url_for('rental.record') }}" method="get">
           <input type="text" placeholder="책을 검색하세요!" name="search">
