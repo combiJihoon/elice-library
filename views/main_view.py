@@ -22,7 +22,7 @@ def home():
 
     page = request.args.get('page', type=int, default=1)
     book_list = book_list.paginate(page, per_page=8)
-    return render_template('index.html', book_list=book_list)
+    return render_template('books/index.html', book_list=book_list)
 
 
 @bp.route('/create-comment/<int:book_id>', methods=['POST'])
@@ -82,4 +82,4 @@ def detail(book_id):
 
     comment_list = comment_list.all()
 
-    return render_template('book_detail.html', book=book, comment_list=comment_list, created_times=created_times, img_url=img_url)
+    return render_template('books/book_detail.html', book=book, comment_list=comment_list, created_times=created_times, img_url=img_url)

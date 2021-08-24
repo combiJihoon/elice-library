@@ -1,13 +1,4 @@
 {% extends './base.html' %}
-{% block flash %}
-<div id="flash" class="signup-flash">
-    {% for message in get_flashed_messages() %}
-    <div class="flash alert alert-info">
-        {{message}}
-    </div>
-    {% endfor %}
-</div>
-{% endblock flash %}
 {% block content %}
 <!-- Signup -->
 <div id="#signup">

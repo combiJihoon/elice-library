@@ -20,7 +20,7 @@ def load_logged_in_user():
 
 @bp.route('/login', methods=['GET'])
 def login_try():
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 
 @bp.route('/login', methods=['POST'])
@@ -52,7 +52,7 @@ def login():
 
 @bp.route('/signup', methods=['GET'])
 def signup_try():
-    return render_template('signup.html')
+    return render_template('auth/signup.html')
 
 
 @bp.route('/signup', methods=['POST'])
