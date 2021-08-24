@@ -40,6 +40,13 @@
 - [x] API documentation 설계
 - [x] Pagination 구현
 
+**8월 23일 (월)**
+
+- [x] 404 error page 구현
+- [x] 날짜 형식 에러 수정
+- [x] API documentation 설계
+- [x] 검색 기능 구현(추가 구현)
+
 ### ERD
 
 ![erd](./erd.png)
