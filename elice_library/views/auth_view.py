@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, url_for, flash, session, g
 from werkzeug.utils import redirect
 from bcrypt import checkpw, hashpw, gensalt
-from .. import db
-from ..models import User
+from elice_library import db
+from elice_library.models import User
 
-from ..authentication import user_id_validate, signup_pw_validate, name_validate
+from elice_library.authentication import user_id_validate, signup_pw_validate, name_validate
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g, jsonify
 from werkzeug.utils import redirect
-from ..models import Book, Comment
-from .. import db
+from elice_library.models import Book, Comment
+from elice_library import db
 
 import pytz
 
@@ -72,8 +72,6 @@ def detail(book_id):
         book_id=book_id).order_by(Comment.created_at.desc())
     book = Book.query.filter_by(book_id=book_id).first()
 
-    img_url = '.' + book.img_url
-
     created_times = []
     for comment in comment_list:
         created_time = comment.created_at
@@ -82,4 +80,4 @@ def detail(book_id):
 
     comment_list = comment_list.all()
 
-    return render_template('books/book_detail.html', book=book, comment_list=comment_list, created_times=created_times, img_url=img_url)
+    return render_template('books/book_detail.html', book=book, comment_list=comment_list, created_times=created_times)

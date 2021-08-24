@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, flash, session, g
-from models import Book, Rental
-from app import db
+from elice_library.models import Book, Rental
+from elice_library import db
 from werkzeug.utils import redirect
 
 from datetime import datetime

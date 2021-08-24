@@ -195,6 +195,21 @@
     height: 40px;
 }
 
+.no-reviews {
+    padding: 20px 20px;
+    display: grid;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    background: #f2f5f3;
+}
+
+.login-for-review {
+    margin-top: 10px;
+    color: #37498c;
+    text-decoration: underline;
+    font-weight: bold;
+}
 
 /* .rating {
     display: flex;

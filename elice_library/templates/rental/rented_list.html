@@ -10,7 +10,8 @@
                 <div class="book">
                     <a href="{{ url_for('main.detail', book_id=rental_list.items[i].book_id) }}">
                         <div class="book-img">
-                            <img src="{{ img_urls[i] }}" alt="{{rental_list.items[i].book.book_name}}" />
+                            <img src="{{ url_for('static', filename=rental_list.items[i].book.img_url )}}"
+                                alt="{{rental_list.items[i].book_name}}" />
                         </div>
                     </a>
                     <div class="book-title">

@@ -2,7 +2,7 @@
 import csv
 import datetime
 from elice_library import db, create_app
-from .models import Book
+from elice_library.models import Book
 
 
 app = create_app()
@@ -12,14 +12,14 @@ app.app_context().push()
 def push_data():
     if Book.query.first() is None:
         with app.app_context():
-            with open('./library.csv', 'r', encoding='UTF-8') as data:
+            with open('elice_library/library.csv', 'r', encoding='UTF-8') as data:
                 reader = csv.DictReader(data)
                 for lines in reader:
                     id = lines['id']
-                    img_url = f"./static/images/{id}"
+                    img_url = f"images/{id}"
                     try:
                         # png로 열리면 img_url 은 ".png"
-                        open(f"./static/images/{id}.png")
+                        open(f"elice_library/static/images/{id}.png")
                         img_url += ".png"
                     except:
                         img_url += ".jpg"
@@ -33,7 +33,7 @@ def push_data():
                         lines['pages']), img_url=img_url, isbn=int(lines['isbn']), description=lines['description'], link=lines['link'], stock=10, rating=0)
                     db.session.add(book)
                     db.session.commit()
-            db.create_all(app=app)
+                db.create_all(app=app)
 
 
 push_data()

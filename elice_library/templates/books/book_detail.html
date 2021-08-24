@@ -13,7 +13,7 @@
 <div class="detail-container">
     <div class="intro-box">
         <div class="intro-img">
-            <img src="{{ img_url }}" alt="img of '{{ book.book_name}}'">
+            <img src="{{ url_for('static', filename=book.img_url )}}" alt="{{book.book_name}}" />
         </div>
         <div class="book-detail">
             <table>
@@ -111,6 +111,13 @@
                     </button>
                 </div>
             </form>
+        </div>
+        {% else %}
+        <div class="no-reviews">
+            <p>책이 어떠셨나요? 리뷰를 남겨주세요!</p>
+            <a href="{{ url_for('auth.login') }}">
+                <p class="login-for-review">로그인 후 리뷰 남기기
+            </a>
         </div>
         {% endif %}
     </div>

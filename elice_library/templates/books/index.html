@@ -15,7 +15,7 @@
             <div class="book">
                 <a href="{{ url_for('main.detail', book_id=book.book_id) }}" >
                     <div class="book-img">
-                        <img src="{{book.img_url}}" alt="{{book.book_name}}" />
+                        <img src="{{ url_for('static', filename=book.img_url )}}" alt="{{book.book_name}}" />
                     </div>
                 <div class="book-title">
                     <a href="{{ url_for('main.detail', book_id=book.book_id) }}">

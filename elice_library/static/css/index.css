@@ -481,6 +481,8 @@ span.checked {
 
 .login-box a:hover {
     color: rgb(12, 35, 170);
+    font-weight: bold;
+    transition: all 0.5s;
 }
 
 #signup {
