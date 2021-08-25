@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g, jsonify
 from werkzeug.utils import redirect
-from elice_library.models import Book, Comment, User
-from elice_library import db
+from models import Book, Comment, User
+from app import db
 import pytz
 
 bp = Blueprint('comment', __name__, url_prefix='/comment')
