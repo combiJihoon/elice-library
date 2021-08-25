@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, url_for, flash, session, g, jsonify
 from werkzeug.utils import redirect
-from elice_library.models import Book, Comment
-from elice_library import db
+from models import Book, Comment
+from app import db
 
 import pytz
 
