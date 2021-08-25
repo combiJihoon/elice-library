@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import config
-import data
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -22,6 +21,7 @@ def create_app():
     migrate.init_app(app, db)
 
     import models
+
     # blueprint
     from views import main_view, auth_view, comment_view, rental_view
 

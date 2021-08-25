@@ -1,7 +1,7 @@
 from datetime import timedelta
 import os
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(
     os.path.join(BASE_DIR, 'library.db')) + '?check_same_thread=False'
