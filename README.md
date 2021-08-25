@@ -53,6 +53,11 @@
 - [x] img_url 경로 변경(명시적 경로)
 - [x] 세부 UI 추가 변경
 
+**8월 25일 (수)**
+
+- [x] 프로젝트 배포
+- [x] API documentation
+
 ### ERD
 
 ![erd](./erd.png)
