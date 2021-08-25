@@ -42,7 +42,7 @@
 .desc-box {
     margin-top: 10px;
     padding: 20px 50px;
-    height: 300px;
+    height: auto;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
     border-radius: 10px;
 }
@@ -202,8 +202,7 @@
     border-radius: 10px;
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
     background: #f2f5f3;
-    margin: 0 40px;
-
+    margin: 0 40px 40px 40px;
 }
 
 .login-for-review {
@@ -212,6 +211,55 @@
     text-decoration: underline;
     font-weight: bold;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .intro-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .intro-img {
+        width: auto;
+        margin: 40px 40px;
+    }
+
+    .intro-img img {
+        width: 150px;
+    }
+
+    .book-detail {
+        margin: 20px 20px;
+    }
+
+    .desc-box {
+        margin: 20px 20px;
+        height: auto;
+    }
+
+    .detail-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .comment-content-box {
+        font-size: 13px;
+        height: 60px;
+    }
+
+    .comment-create {
+        margin: 0 20px 50px 20px;
+        width: auto;
+    }
+
+    .comment-create-content {
+        width: 100%;
+    }
+
+    .create-comment-btn {
+        margin-left: 50px
+    }
+}
+
 
 /* .rating {
     display: flex;

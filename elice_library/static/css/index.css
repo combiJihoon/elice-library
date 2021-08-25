@@ -41,6 +41,7 @@ a:active {
 }
 
 html {
+    /* width: 100vw; */
     position: relative;
     min-height: 100%;
     margin: 0;
@@ -80,9 +81,20 @@ body {
     padding-right: 5px;
 }
 
+.nav-logo {
+    color: #3e3e3e;
+    font-weight: bold;
+}
+
 .nav-link {
     color: #3e3e3e;
     font-weight: bold;
+}
+
+.nav-logo:hover {
+    color: rgb(12, 35, 170);
+    transition: all 0.8s;
+    transform: scale(1.05);
 }
 
 .nav-link:hover {
@@ -99,7 +111,7 @@ body {
 .flash {
     position: absolute;
     right: 120px;
-    width: 450px;
+    width: 400px;
     -webkit-animation: flip-out-hor-top 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     animation: 0.45s flip-out-hor-top 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
@@ -601,4 +613,155 @@ span.checked {
 
 #search-btn:hover {
     transform: scale(1.8);
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    #content {
+        margin-top: 140px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #nav-title {
+        margin-left: 30px;
+    }
+
+    #nav-right {
+        position: fixed;
+        right: 0;
+        top: 5rem;
+        flex-direction: row;
+        background-color: #fff;
+        width: auto;
+        height: 60px;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    #nav-right.active {
+        right: 45%;
+        margin-top: 10px;
+        background-color: #f0e5e4;
+        ;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    #flash {
+        margin-top: 20px;
+        width: 250px;
+    }
+
+    .flash {
+        text-align: right;
+        right: 20px;
+    }
+
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 20px;
+    }
+
+    .total-record {
+        margin-left: 40px;
+    }
+
+    .total-record p {
+        font-size: 13px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        padding-top: 10px;
+    }
+
+    .search-container {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 50px;
+    }
+
+    .search-container input {
+        width: 180px;
+    }
+
+    .book {
+        width: 160px;
+        height: 300px;
+    }
+
+    .book-title h5 {
+        font-size: 13px;
+    }
+
+    .book-info p {
+        margin-top: 10px;
+        font-size: 13px;
+    }
+
+    .book-img {
+        height: 100px;
+    }
+
+    .book img {
+        width: 80px;
+    }
+
+    #btn_rent {
+        height: 30px;
+        font-size: 15px;
+    }
+
+    .signup-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .signup-form {
+        padding: 0 100px;
+    }
+
+    .password-rule {
+        padding: 50px 100px;
+    }
+    
+    .footer {
+        display: flex;
+        justify-items: flex-end;
+    }
+    
+    .footer p {
+        margin-left: 300px;
+    }
 }
