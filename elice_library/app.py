@@ -21,7 +21,6 @@ def create_app():
     migrate.init_app(app, db)
 
     import models
-
     # blueprint
     from views import main_view, auth_view, comment_view, rental_view
 
