@@ -94,8 +94,7 @@ def add_data():
     book_name = request.form['book_name']
     publisher = request.form['publisher']
     author = request.form['author']
-    publicated_at = datetime.strptime(
-        request.form['publicated_at'], '%Y-%m-%d')
+    publicated_at = request.form['publicated_at']
     pages = request.form['pages']
     isbn = request.form['isbn']
     description = request.form['description']
@@ -104,23 +103,33 @@ def add_data():
     stock = request.form['stock']
     rating = 0
 
-    # book_id = book.book_id + 1
+    data = [book_name, publisher, author, publicated_at,
+            pages, isbn, description, link, f, stock]
+    if not all(data):
+        flash('입력하지 않은 내용이 있습니다.')
+        return redirect(url_for('admin.add_data_try'))
 
-    # img_url.filename = f'{book_id}'
-    f.save("static/images/" + secure_filename(f.filename))
-    img_url = "images/" + secure_filename(f.filename)
+    else:
+        publicated_at = datetime.strptime(
+            publicated_at, '%Y-%m-%d')
 
-    book = Book.query.filter_by(book_name=book_name).first()
+        f.save("static/images/" + secure_filename(f.filename))
+        img_url = "images/" + secure_filename(f.filename)
 
-    if not book:
-        user_id = session['user_id']
-        new_book = Book(book_name=book_name, publisher=publisher,
-                        author=author, publicated_at=publicated_at, pages=pages, isbn=isbn, description=description, link=link, img_url=img_url, stock=stock, rating=rating)
+        book = Book.query.filter_by(book_name=book_name).first()
 
-        add_stock = AddStock(user_id=user_id, book_name=book_name)
+        if not book:
+            user_id = session['user_id']
+            new_book = Book(book_name=book_name, publisher=publisher,
+                            author=author, publicated_at=publicated_at, pages=pages, isbn=isbn, description=description, link=link, img_url=img_url, stock=stock, rating=rating)
 
-        db.session.add(new_book)
-        db.session.add(add_stock)
-        db.session.commit()
+            add_stock = AddStock(user_id=user_id, book_name=book_name)
 
-        return render_template('admin/admin_dashboard.html')
+            db.session.add(new_book)
+            db.session.add(add_stock)
+            db.session.commit()
+
+            return redirect(url_for('admin.dashboard'))
+        else:
+            flash('이미 등록된 책입니다.')
+            return redirect(url_for('admin.add_data_try'))

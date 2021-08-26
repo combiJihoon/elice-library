@@ -8,6 +8,9 @@
         </form>
     </div>
 </div>
+<div class="total-record">
+    <p>총 {{ added_list.total }}권의 등록 내역이 있습니다.</p>
+</div>
 <div class="container">
     {% if added_list %}
     {% for added in added_list.items %}

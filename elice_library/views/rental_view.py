@@ -27,14 +27,10 @@ def record():
             rental_list = Rental.query.filter(
                 Rental.user_id == user_id, Rental.returned_at != None).order_by(Rental.rented_at.desc())
 
-        img_urls = []
-        for rental in rental_list:
-            img_urls.append('.' + rental.book.img_url)
-
         page = request.args.get('page', type=int, default=1)
         rental_list = rental_list.paginate(page, per_page=8)
 
-        return render_template('rental/rental_record.html', rental_list=rental_list, img_urls=img_urls)
+        return render_template('rental/rental_record.html', rental_list=rental_list)
 
 
 @bp.route('/<int:book_id>', methods=['POST'])

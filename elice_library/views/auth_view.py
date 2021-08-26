@@ -90,7 +90,9 @@ def signup():
                             user_password=hashed_password, user_name=user_name)
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('main.home'))
+
+            flash('성공적으로 가입 되었습니다!')
+            return redirect(url_for('auth.login'))
         else:
             flash('이미 존재하는 아이디입니다. 다시 입력해 주세요.')
             return redirect(url_for('auth.signup_try'))

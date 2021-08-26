@@ -1190,7 +1190,7 @@ span.checked {
 
 .password-rule {
     /* margin-left: 80px */
-    padding: 150px 100px;
+    /* padding: 150px 100px; */
 }
 
 .password-rule h5 {
@@ -1200,7 +1200,7 @@ span.checked {
 
 .password-rule p {
     /* margin-left: 80px */
-    background-color: beige;
+    /* background-color: beige; */
     opacity: 0.8;
 }
 
@@ -1269,9 +1269,10 @@ span.checked {
 }
 
 .book-add-container {
+    width: 480px;
     justify-content: center;
     display: flex;
-    margin: 0 350px;
+    margin: 0 auto;
     background: #fff;
     padding: 20px 20px;
     border-radius: 15px;
@@ -1290,6 +1291,14 @@ span.checked {
 .add-book-form input {
     margin: 10px 0;
     width: auto;
+}
+
+#add-book {
+    width: 300px;
+}
+
+#add-book-btn {
+    width: 300px;
 }
 
 

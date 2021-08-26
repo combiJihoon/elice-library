@@ -78,3 +78,23 @@ class Comment(db.Model):
         self.book_id = book_id
         self.content = content
         self.rating = rating
+
+
+class UserRoles(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    role_title = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey(
+        'user.user_id', ondelete='CASCADE'))
+
+
+class AddStock(db.Model):
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey(
+        'user.user_id', ondelete='CASCADE'), nullable=False)
+    book_name = db.Column(db.String(), db.ForeignKey(
+        'book.book_name', ondelete='CASCADE'), nullable=False)
+    added_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), nullable=False)
+
+    book = db.relationship('Book', backref=db.backref(
+        'addstock_set'))
