@@ -1,0 +1,66 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+<!-- Signup -->
+<div id="#signup">
+    <div class="book-add-container">
+        <form class="add-book-form" action="{{ url_for('admin.add_data') }}" method="post">
+            <h2>책 등록하기</h2>
+            <div class="signup-input">
+                <div class="form-group">
+                    <label for="book_name">책 이름</label>
+                    <input type="text" id="add-book-name" class="form-control" placeholder="책 이름을 입력하세요."
+                        name="book_name" />
+                </div>
+                <div class="form-group">
+                    <label for="publisher">출판사</label>
+                    <input type="text" id="add-book-name" class="form-control" placeholder="출판사를 입력하세요."
+                        name="publisher" />
+                </div>
+                <div class="form-group">
+                    <label for="author">작가</label>
+                    <input type="text" id="add-book-author" class="form-control"
+                        placeholder="작가 이름을 입력하세요." name="author" />
+                </div>
+                <div class="form-group">
+                    <label for="publicated_at">출판일</label>
+                    <input type="date" id="add-book-publicated_at"
+                        class="form-control" placeholder="출판일을 입력하세요."
+                        name="publicated_at" />
+                </div>
+                <div class="form-group">
+                    <label for="pages">페이지수</label>
+                    <input type="text" id="add-book-pages" class="form-control" placeholder="페이지 수를 입력하세요."
+                        name="pages" />
+                </div>
+                <div class="form-group">
+                    <label for="isbn">isbn</label>
+                    <input type="text" id="add-book-isbn" class="form-control" placeholder="isbn을 입력하세요."
+                        name="isbn" />
+                </div>
+                <div class="form-group">
+                    <label for="link">링크</label>
+                    <input type="text" id="add-book-link" class="form-control"
+                        placeholder="링크를 입력하세요." name="link" />
+                </div>
+                <div class="form-group">
+                    <label for="img_url">이미지 추가</label>
+                    <input type="file" id="add-book-link" class="form-control" name="img_url" />
+                </div>
+                <div class="form-group">
+                    <label for="stock">재고</label>
+                    <input type="text" id="add-book-stock" class="form-control"
+                        placeholder="재고를 입력하세요." name="stock" />
+                </div>
+                <div class="form-group">
+                    <label for="description">책 소개</label>
+                    <textarea type="password" id="add-book-desc" class="form-control"
+                        placeholder="책 소개를 입력하세요." name="description"></textarea>
+                </div>
+            </div>
+            <button class="signup-btn" type="submit">등록하기</button>
+        </form>
+    </div>
+    <!-- /Signup -->
+
+</div>
+{% endblock content %}

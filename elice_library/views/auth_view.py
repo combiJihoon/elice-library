@@ -15,7 +15,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = User.query.get(user_id)
+        g.user = User.query.filter_by(user_id=session['user_id']).first()
 
 
 @bp.route('/login', methods=['GET'])

@@ -629,6 +629,30 @@ span.checked {
     background-color: #101010;
 }
 
+.book-add-container {
+    justify-content: center;
+    display: flex;
+    margin: 0 350px;
+    background: #fff;
+    padding: 20px 20px;
+    border-radius: 15px;
+    box-shadow: rgb(14 30 37 / 12%) 0px 2px 4px 0px, rgb(14 30 37 / 32%) 0px 2px 16px 0px;
+}
+
+.add-book-form {
+    padding: 20px 100px;
+}
+
+.add-book-form h2 {
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.add-book-form input {
+    margin: 10px 0;
+    width: auto;
+}
+
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     #content {
         margin-top: 140px;

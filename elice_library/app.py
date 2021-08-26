@@ -22,12 +22,13 @@ def create_app():
 
     import models
     # blueprint
-    from views import main_view, auth_view, comment_view, rental_view
+    from views import main_view, auth_view, comment_view, rental_view, admin_view
 
     app.register_blueprint(main_view.bp)
     app.register_blueprint(auth_view.bp)
     app.register_blueprint(comment_view.bp)
     app.register_blueprint(rental_view.bp)
+    app.register_blueprint(admin_view.bp)
 
     # 오류 페이지 등록
     app.register_error_handler(404, page_not_found)
