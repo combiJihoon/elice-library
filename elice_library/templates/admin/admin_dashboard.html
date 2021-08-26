@@ -1,0 +1,97 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+<div class="total-record">
+    <div class="search-container">
+        <form action="{{ url_for('main.home') }}" method="get">
+            <input type="text" placeholder="책을 검색하세요!" name="search">
+            <button id="search-btn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    {% if added_list %}
+    {% for added in added_list.items %}
+    <div class="book-container">
+        <div class="book">
+            <a href="{{ url_for('main.detail', book_id=added.book.book_id) }}">
+                <div class="book-img">
+                    <img src="{{ url_for('static', filename=added.book.img_url )}}" alt="{{added.book.book_name}}" />
+                </div>
+                <div class="book-title">
+                    <a href="{{ url_for('main.detail', book_id=added.book.book_id) }}">
+                        <h5>{{added.book.book_name}}</h5>
+                    </a>
+                </div>
+                <div class="book-info">
+                    <div class="rating-result" data="{{added.book.rating}}">
+                        {% for i in range(added.book.rating) %}
+                        <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in range(5 - (added.book.rating)) %}
+                        <span class="fa fa-star"></span>
+                        {% endfor %}
+                    </div>
+                    <p>{{added.book.stock}}권 남음</p>
+                    <form class="btn_rent" action="#"
+                        method="post">
+                        <button id="btn_rent" type="submit">수정하기</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="blank">
+        <p>아직 책이 없어요.</p>
+    </div>
+    {% endif %}
+</div>
+<nav id="pagination-nav" aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if added_list.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ added_list.prev_num }}">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">이전</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tab-index="-1" aria-disabled="true" href="#">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">이전</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for page_num in added_list.iter_pages() %}
+        {% if page_num %}
+        {% if page_num != added_list.page %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+        </li>
+        {% else %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">{{ page_num }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% if added_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ added_list.next_num }}">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">다음</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">다음</span>
+            </a>
+        </li>
+        {% endif %}
+        </li>
+    </ul>
+</nav>
+{% endblock content %}
