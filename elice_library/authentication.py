@@ -15,7 +15,7 @@ def login_pw_length_validate(pw: str):
 
 # 로그인, 회원가입: 이메일 아이디
 def user_id_validate(user_id: str) -> bool:
-    rule = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+[.]?\w{2,3}$'
+    rule = r'^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$'
     valid = re.search(rule, user_id)
 
     if not valid:
