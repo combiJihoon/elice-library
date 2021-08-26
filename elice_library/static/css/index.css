@@ -506,7 +506,7 @@ span.checked {
 .signup-container {
     display: flex;
     justify-content: center;
-    margin: 0 250px;
+    margin: 0 300px;
     border-radius: 15px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -515,7 +515,7 @@ span.checked {
 }
 
 .signup-form {
-    padding: 20px 100px;
+    padding: 20px 50px 20px 60px;
 }
 
 .signup-form input {
@@ -549,20 +549,27 @@ span.checked {
     transform: scale(1.05);
 }
 
-.password-rule {
-    /* margin-left: 80px */
-    padding: 150px 100px;
+.rules {
+    margin: 50px 50px 50px 0;
 }
 
-.password-rule h5 {
+.password-rule {
+    /* margin-left: 80px */
+    margin: 10px 10px;
+    padding: 20px 20px;
+    background-color: #dfe6f2;
+    border-radius: 10px;
+}
+
+.rule-title {
     /* margin-left: 80px */
     opacity: 0.9;
 }
 
 .password-rule p {
     /* margin-left: 80px */
-    background-color: beige;
-    opacity: 0.8;
+    /* background-color: beige; */
+    opacity: 0.6;
 }
 
 .return-btn {
