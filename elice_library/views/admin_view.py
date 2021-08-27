@@ -140,7 +140,7 @@ def add_data():
             new_book = Book(book_name=book_name, publisher=publisher,
                             author=author, publicated_at=publicated_at, pages=pages, isbn=isbn, description=description, link=link, img_url=img_url, stock=stock, rating=rating)
 
-            add_stock = AddStock(user_id=user_id, book_name=book_name)
+            add_stock = AddStock(user_id=user_id, isbn=isbn)
 
             db.session.add(new_book)
             db.session.add(add_stock)

@@ -73,7 +73,7 @@ class Comment(db.Model):
     user = db.relationship('User', backref=db.backref(
         'comment_set'))
 
-    def __init__(self, user_id, book_id, content, rating, created_at):
+    def __init__(self, user_id, book_id, content, rating):
         self.user_id = user_id
         self.book_id = book_id
         self.content = content

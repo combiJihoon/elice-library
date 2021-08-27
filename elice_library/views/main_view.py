@@ -44,7 +44,7 @@ def create_comment(book_id):
             return redirect(url_for('main.detail', book_id=book_id))
 
         comment = Comment(user_id=user_id, book_id=book_id,
-                          rating=rating, content=content, created_at=datetime.now())
+                          rating=rating, content=content)
 
         db.session.add(comment)
         db.session.commit()
@@ -70,15 +70,15 @@ def detail(book_id):
     # data = request.get_json()
     # book_id = request.form['book_id']
     comment_list = Comment.query.filter_by(
-        book_id=book_id).order_by(Comment.created_at.desc())
+        book_id=book_id).order_by(Comment.created_at.desc()).all()
     book = Book.query.filter_by(book_id=book_id).first()
 
-    created_times = []
-    for comment in comment_list:
-        created_time = comment.created_at
-        created_times.append(created_time.astimezone(
-            pytz.timezone("Asia/Seoul")))
+    # created_times = []
+    # for comment in comment_list:
+    #     created_time = comment.created_at
+    #     created_times.append(created_time.astimezone(
+    #         pytz.timezone("Asia/Seoul")))
 
-    comment_list = comment_list.all()
+    # comment_list = comment_list.all()
 
-    return render_template('books/book_detail.html', book=book, comment_list=comment_list, created_times=created_times)
+    return render_template('books/book_detail.html', book=book, comment_list=comment_list)

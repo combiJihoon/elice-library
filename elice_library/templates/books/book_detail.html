@@ -68,7 +68,7 @@
             </div>
             <div class="comment-footer">
                 <p class="comment-date">
-                    {{created_times[i].strftime('%Y-%m-%d %H:%M:%S')}}</p>
+                    {{ comment_list[i].created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
                 <div id="comment-rating" class="rating-result" data="{{comment_list[i].rating}}">
                     {% for i in range(comment_list[i].rating) %}
                     <span class="fa fa-star checked"></span>
