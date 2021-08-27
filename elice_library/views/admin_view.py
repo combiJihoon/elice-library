@@ -18,12 +18,12 @@ def load_administrator():
         g.administrator = UserRoles.query.get(user_id)
 
 
-@bp.route('/login', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def login_try():
     return render_template('admin/admin_login.html')
 
 
-@bp.route('/login', methods=['POST'])
+@bp.route('/', methods=['POST'])
 def admin_login():
     user_id = request.form['user_id']
     user_password = request.form['user_password']
@@ -35,11 +35,11 @@ def admin_login():
             # validators 실행
             if len(user_password) < 8:
                 flash('비밀번호는 8자리 이상 입력하세요.')
-                return redirect(url_for('admin.login'))
+                return redirect(url_for('admin.login_try'))
 
             elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
                 flash('비밀번호가 일치하지 않습니다.')
-                return redirect(url_for('admin.login'))
+                return redirect(url_for('admin.login_try'))
 
             else:
                 session.clear()
@@ -112,6 +112,10 @@ def add_data():
     else:
         publicated_at = datetime.strptime(
             publicated_at, '%Y-%m-%d')
+
+        books = Book.query.all()
+        img_title = str(len(books) + 1)
+        f.filename = f.filename.replace(f.filename[:-4], img_title)
 
         f.save("static/images/" + secure_filename(f.filename))
         img_url = "images/" + secure_filename(f.filename)
