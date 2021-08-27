@@ -35,6 +35,7 @@ li {
     outline: none;
 }
 
+
 a:hover,
 a:active {
     text-decoration: none;
@@ -1315,7 +1316,7 @@ span.checked {
 
     #nav-right {
         position: fixed;
-        right: 0;
+        right: -100%;
         top: 5rem;
         flex-direction: row;
         background-color: #fff;

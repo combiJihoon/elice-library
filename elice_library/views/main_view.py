@@ -3,6 +3,7 @@ from werkzeug.utils import redirect
 from models import Book, Comment
 from app import db
 
+from datetime import datetime
 import pytz
 
 bp = Blueprint('main', __name__, url_prefix='/')
@@ -43,7 +44,7 @@ def create_comment(book_id):
             return redirect(url_for('main.detail', book_id=book_id))
 
         comment = Comment(user_id=user_id, book_id=book_id,
-                          rating=rating, content=content)
+                          rating=rating, content=content, created_at=datetime.now())
 
         db.session.add(comment)
         db.session.commit()

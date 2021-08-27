@@ -133,7 +133,7 @@ def add_data():
         f.save("static/images/" + secure_filename(f.filename))
         img_url = "images/" + secure_filename(f.filename)
 
-        book = Book.query.filter_by(book_name=book_name).first()
+        book = Book.query.filter_by(isbn=isbn).first()
 
         if not book:
             user_id = session['user_id']

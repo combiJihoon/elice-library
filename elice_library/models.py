@@ -44,7 +44,7 @@ class Rental(db.Model):
     user_id = db.Column(db.String(150), db.ForeignKey(
         'user.user_id', ondelete='CASCADE'), nullable=False)
     rented_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
+        db.DateTime, default=datetime.now(), nullable=False)
     returned_at = db.Column(
         db.DateTime, nullable=True)
 
@@ -64,16 +64,16 @@ class Comment(db.Model):
     content = db.Column(db.Text(), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
+        db.DateTime, default=datetime.now(), nullable=False)
     modified_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
+        db.DateTime, nullable=True)
 
     book = db.relationship('Book', backref=db.backref(
         'comment_set'))
     user = db.relationship('User', backref=db.backref(
         'comment_set'))
 
-    def __init__(self, user_id, book_id, content, rating):
+    def __init__(self, user_id, book_id, content, rating, created_at):
         self.user_id = user_id
         self.book_id = book_id
         self.content = content
@@ -81,20 +81,29 @@ class Comment(db.Model):
 
 
 class UserRoles(db.Model):
+    __tablename__ = 'user_roles'
+
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     role_title = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer(), db.ForeignKey(
+    user_id = db.Column(db.String(150), db.ForeignKey(
         'user.user_id', ondelete='CASCADE'))
+
+    user = db.relationship('User', backref=db.backref(
+        'user_set'))
 
 
 class AddStock(db.Model):
+    __tablename__ = 'add_stock'
+
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer(), db.ForeignKey(
         'user.user_id', ondelete='CASCADE'), nullable=False)
-    book_name = db.Column(db.String(), db.ForeignKey(
-        'book.book_name', ondelete='CASCADE'), nullable=False)
+    isbn = db.Column(db.Integer(), db.ForeignKey(
+        'book.isbn', ondelete='CASCADE'), nullable=False)
     added_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), nullable=False)
+        db.DateTime, default=datetime.now(), nullable=False)
+    modified_at = db.Column(
+        db.DateTime, default=datetime.now(), nullable=True)
 
     book = db.relationship('Book', backref=db.backref(
         'addstock_set'))
