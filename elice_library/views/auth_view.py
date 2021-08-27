@@ -33,15 +33,15 @@ def login():
     # validators 실행
     if not user_data:
         flash('아이디를 다시 확인해 주세요.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login_try'))
 
     elif len(user_password) < 8:
         flash('비밀번호는 8자리 이상 입력하세요.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login_try'))
 
     elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
         flash('비밀번호가 일치하지 않습니다.')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login_try'))
 
     else:
         session.clear()

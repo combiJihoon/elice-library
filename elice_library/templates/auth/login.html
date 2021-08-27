@@ -4,8 +4,10 @@
     <form class="form-signin" action="{{ url_for('auth.login') }}" method="post">
         <h2 class="form-signin-heading">로그인 </h2>
         <div class="login-input">
-            <input type="email" class="form-control" name="user_id" placeholder="elice@elice.com" autofocus="" />
-            <input type="password" class="form-control" name="user_password" placeholder="비밀번호를 입력하세요."/>
+            <input type="email" class="form-control" name="user_id" placeholder="elice@elice.com" autofocus=""
+                value="{{ request.form['user_id'] }}" />
+            <input type="password" class="form-control" name="user_password" placeholder="비밀번호를 입력하세요."
+                value="{{ request.form['user_password'] }}" />
         </div>
         <div class="login-box">
             <a href="{{ url_for('auth.signup_try') }}">

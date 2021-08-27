@@ -47,6 +47,9 @@ def admin_login():
                 flash(
                     f'{user_data.user_name}({is_administrator.role_title})님 안녕하세요!')
                 return redirect(url_for('admin.dashboard'))
+        else:
+            flash('사용 권한이 없습니다.')
+            return redirect(url_for('main.home'))
     else:
         flash('아이디를 다시 확인해 주세요.')
         return redirect(url_for('admin.login_try'))
