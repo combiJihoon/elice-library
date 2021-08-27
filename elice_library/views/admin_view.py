@@ -9,15 +9,6 @@ from datetime import datetime
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 
-@bp.before_app_request
-def load_administrator():
-    user_id = session.get('user_id')
-    if user_id is None:
-        g.administrator = None
-    else:
-        g.administrator = UserRoles.query.get(user_id)
-
-
 @bp.route('/', methods=['GET'])
 def login_try():
     return render_template('admin/admin_login.html')
@@ -35,15 +26,18 @@ def admin_login():
             # validators 실행
             if len(user_password) < 8:
                 flash('비밀번호는 8자리 이상 입력하세요.')
-                return redirect(url_for('admin.login_try'))
+                # return redirect(url_for('admin.login_try'))
+                return render_template('admin/admin_login.html', user_id=user_id, user_password=user_password)
 
             elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
                 flash('비밀번호가 일치하지 않습니다.')
-                return redirect(url_for('admin.login_try'))
+                # return redirect(url_for('admin.login_try'))
+                return render_template('admin/admin_login.html', user_id=user_id, user_password=user_password)
 
             else:
                 session.clear()
                 session['user_id'] = user_id
+                session['administrator'] = user_id
                 flash(
                     f'{user_data.user_name}({is_administrator.role_title})님 안녕하세요!')
                 return redirect(url_for('admin.dashboard'))
@@ -52,13 +46,13 @@ def admin_login():
             return redirect(url_for('main.home'))
     else:
         flash('아이디를 다시 확인해 주세요.')
-        return redirect(url_for('admin.login_try'))
+        # return redirect(url_for('admin.login_try'))
+        return render_template('admin/admin_login.html', user_id=user_id, user_password=user_password)
 
 
-@bp.route('/logout', methods=['POST'])
+@bp.route('/logout', methods=['GET'])
 def logout():
-    db.session.clear()
-
+    session.clear()
     flash('로그아웃 되었습니다.')
     return redirect(url_for('admin.login_try'))
 
@@ -66,7 +60,9 @@ def logout():
 @bp.route('/dashboard', methods=['GET'])
 def dashboard():
     user_id = session['user_id']
+
     is_authorized = UserRoles.query.filter_by(user_id=user_id).first()
+
     if is_authorized:
 
         # search가 있을 경우
@@ -84,6 +80,7 @@ def dashboard():
 
         return render_template('admin/admin_dashboard.html', added_list=added_list)
     else:
+        flash('관리자만 사용 가능합니다.')
         return redirect(url_for('admin.login_try'))
 
 
@@ -106,11 +103,24 @@ def add_data():
     stock = request.form['stock']
     rating = 0
 
+    # context = dict()
+    # context['book_name'] = book_name
+    # context['publisher'] = publisher
+    # context['author'] = author
+    # context['publicated_at'] = publicated_at
+    # context['pages'] = pages
+    # context['isbn'] = isbn
+    # context['description'] = description
+    # context['link'] = link
+    # context['img_url'] = f
+    # context['stock'] = stock
+
     data = [book_name, publisher, author, publicated_at,
             pages, isbn, description, link, f, stock]
     if not all(data):
         flash('입력하지 않은 내용이 있습니다.')
-        return redirect(url_for('admin.add_data_try'))
+        # return redirect(url_for('admin.add_data_try'))
+        return render_template('admin/admin_add_book.html', book_name=book_name, publisher=publisher, author=author, publicated_at=publicated_at, pages=pages, isbn=isbn, description=description, link=link, stock=stock)
 
     else:
         publicated_at = datetime.strptime(
@@ -139,4 +149,5 @@ def add_data():
             return redirect(url_for('admin.dashboard'))
         else:
             flash('이미 등록된 책입니다.')
-            return redirect(url_for('admin.add_data_try'))
+            # return redirect(url_for('admin.add_data_try'))
+            return render_template('admin/admin_add_book.html', book_name=book_name, publisher=publisher, author=author, publicated_at=publicated_at, pages=pages, isbn=isbn, description=description, link=link, stock=stock)

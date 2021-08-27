@@ -22,6 +22,7 @@
                     <a class="nav-logo" href="{{ url_for('main.home')}}">레이서 도서관</a>
                 </li>
             </ul>
+            {% if session['administrator'] %}
             <ul id="nav-right">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('admin.dashboard')}}">등록내역</a>
@@ -37,6 +38,7 @@
                     </a>
                 </li>
             </ul>
+            {% endif %}
         </nav>
     </header>
     <div id="flash">

@@ -33,15 +33,18 @@ def login():
     # validators 실행
     if not user_data:
         flash('아이디를 다시 확인해 주세요.')
-        return redirect(url_for('auth.login_try'))
+        # return redirect(url_for('auth.login_try'))
+        return render_template('auth/login.html', user_password=user_password, user_id=user_id)
 
     elif len(user_password) < 8:
         flash('비밀번호는 8자리 이상 입력하세요.')
-        return redirect(url_for('auth.login_try'))
+        # return redirect(url_for('auth.login_try'))
+        return render_template('auth/login.html', user_password=user_password, user_id=user_id)
 
     elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
         flash('비밀번호가 일치하지 않습니다.')
-        return redirect(url_for('auth.login_try'))
+        # return redirect(url_for('auth.login_try'))
+        return render_template('auth/login.html', user_password=user_password, user_id=user_id)
 
     else:
         session.clear()
@@ -67,22 +70,27 @@ def signup():
     # 아이디 validator 실행
     if not user_id_validate(user_id):
         flash('아이디는 이메일 형식으로 입력하세요.')
-        return redirect(url_for('auth.signup_try'))
+        # return redirect(url_for('auth.signup_try'))
+        return render_template('auth/signup.html', user_id=user_id, user_password=user_password, user_password_check=user_password_check, user_name=user_name)
 
     elif not signup_pw_validate(user_password):
         flash('아래의 비밀번호 규칙을 확인하세요.')
-        return redirect(url_for('auth.signup_try'))
+        # return redirect(url_for('auth.signup_try'))
+        return render_template('auth/signup.html', user_id=user_id, user_password=user_password, user_password_check=user_password_check, user_name=user_name)
 
     elif not name_validate(user_name):
         flash('이름은 영문 또는 한글로 입력하세요.')
-        return redirect(url_for('auth.signup_try'))
+        # return redirect(url_for('auth.signup_try'))
+        return render_template('auth/signup.html', user_id=user_id, user_password=user_password, user_password_check=user_password_check, user_name=user_name)
 
     else:
         # 아이디 중복 확인 후 회원가입 시작
         if not user_data:
             if user_password != user_password_check:
                 flash('비밀번호가 일치하지 않습니다.')
-                return redirect(url_for('auth.signup_try'))
+                # return redirect(url_for('auth.signup_try'))
+                return render_template('auth/signup.html', user_id=user_id, user_password=user_password, user_password_check=user_password_check, user_name=user_name)
+
             hashed_password = hashpw(
                 user_password.encode('utf-8'), gensalt())
 
@@ -95,7 +103,8 @@ def signup():
             return redirect(url_for('auth.login'))
         else:
             flash('이미 존재하는 아이디입니다. 다시 입력해 주세요.')
-            return redirect(url_for('auth.signup_try'))
+            # return redirect(url_for('auth.signup_try'))
+            return render_template('auth/signup.html', user_id=user_id, user_password=user_password, user_password_check=user_password_check, user_name=user_name)
 
 
 @bp.route('/logout', methods=['GET'])

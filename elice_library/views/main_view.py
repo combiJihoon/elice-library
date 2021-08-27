@@ -38,7 +38,7 @@ def create_comment(book_id):
         except:
             rating = 0
 
-        if content is None:
+        if len(content) == 0:
             flash('내용을 입력해 주세요!')
             return redirect(url_for('main.detail', book_id=book_id))
 
