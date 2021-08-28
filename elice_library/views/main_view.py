@@ -70,7 +70,7 @@ def detail(book_id):
     # data = request.get_json()
     # book_id = request.form['book_id']
     comment_list = Comment.query.filter_by(
-        book_id=book_id).order_by(Comment.created_at.desc()).all()
+        book_id=book_id).order_by(Comment.comment_id.desc()).all()
     book = Book.query.filter_by(book_id=book_id).first()
 
     # created_times = []
