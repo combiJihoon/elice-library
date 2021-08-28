@@ -68,11 +68,11 @@
 - [x] navbar 수정
 - [x] 수정내역 VM에 반영
 
-### ERD
+## ERD
 
 ![erd](./erd.png)
 
-### :rocket: Todo List
+## :rocket: Todo List
 
 - **로그인**
 
