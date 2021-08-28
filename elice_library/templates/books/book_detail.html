@@ -68,7 +68,7 @@
             </div>
             <div class="comment-footer">
                 <p class="comment-date">
-                    {{ comment_list[i].created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                    {{ comment_list[i].created_at.strftime('%Y-%m-%d') }}</p>
                 <div id="comment-rating" class="rating-result" data="{{comment_list[i].rating}}">
                     {% for i in range(comment_list[i].rating) %}
                     <span class="fa fa-star checked"></span>
@@ -128,9 +128,16 @@
                     dataType : 'JSON',
                     data: {
                         'comment_id': $(this).data('id'),
+                    },
+                    success: function (res) {
+                        let msg = res['message']
+                        if (msg === 'success') {
+                            window.location.reload()
+                        } else {
+                            alert('오류가 생겼습니다.')
+                        }
                     }
                 })
-                window.location.reload();
             }
         });
     });

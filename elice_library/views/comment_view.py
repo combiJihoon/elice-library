@@ -15,7 +15,7 @@ def delete():
     db.session.delete(comment)
     db.session.commit()
 
-    return jsonify({"message": "정상적으로 삭제 되었습니다."})
+    return jsonify({"message": "success"})
 
 
 # @bp.route('/update/<int:comment_id>', methods=['GET'])
