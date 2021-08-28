@@ -12,6 +12,21 @@ def delete():
     comment_id = request.form['comment_id']
     comment = Comment.query.filter_by(comment_id=comment_id).first()
 
+    book_id = comment.book.book_id
+    book = Book.query.filter_by(book_id=book_id).first()
+    rows = Comment.query.filter_by(book_id=book_id).all()
+
+    len_of_rows = len(rows) - 1
+    if len_of_rows != 0:
+        rating_sum = 0
+        for row in rows:
+            rating_sum += row.rating
+        rating_sum -= comment.rating
+        avg_rating = round(rating_sum / len_of_rows)
+        book.rating = avg_rating
+    else:
+        book.rating = 0
+
     db.session.delete(comment)
     db.session.commit()
 
