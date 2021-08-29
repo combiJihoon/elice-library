@@ -341,6 +341,7 @@ body {
 }
 
 .footer {
+    display: flex;
     width: 90%;
     min-width: 899px;
     margin: 0 auto;
@@ -355,6 +356,18 @@ body {
     letter-spacing: -0.85px;
 }
 
+#admin-redirect {
+    margin-right: auto;
+}
+
+#admin-redirect a {
+    color: #3e3e3e;
+    font-weight: 400;
+}
+
+#admin-redirect a:hover {
+    color: #37498c;
+}
 
 .rating {
     display: flex;
