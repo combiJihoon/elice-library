@@ -146,6 +146,7 @@ def add_data():
             db.session.add(add_stock)
             db.session.commit()
 
+            flash('성공적으로 등록 되었습니다.')
             return redirect(url_for('admin.dashboard'))
         else:
             flash('이미 등록된 책입니다.')
