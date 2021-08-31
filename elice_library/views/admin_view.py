@@ -128,7 +128,12 @@ def add_data():
 
         books = Book.query.all()
         img_title = str(len(books) + 1)
-        f.filename = f.filename.replace(f.filename[:-4], img_title)
+        for val in f.filename:
+            if val == '.':
+                idx = f.filename.index(val)
+                break
+
+        f.filename = f.filename.replace(f.filename[:idx], img_title)
 
         f.save("static/images/" + secure_filename(f.filename))
         img_url = "images/" + secure_filename(f.filename)
