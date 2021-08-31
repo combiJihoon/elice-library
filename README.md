@@ -8,7 +8,7 @@
 
 **🚀 기술 스택**
 |구분|설명|
-|:---:|:---:|
+|:---:|:----------:|
 |Front|HTML, jinja2, CSS|
 |Server|Flask|
 |DB|SQLite, SQLAlchemy|
