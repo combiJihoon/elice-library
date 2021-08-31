@@ -59,7 +59,53 @@
 - 새 책 등록하기
 - 등록 내역 확인
 
-## **4. 데이터베이스 구조**
+## **4. API List** :open_file_folder:
+
+### Main
+
+---
+
+- home
+- detail
+- create-comment
+
+### Auth
+
+---
+
+- login_try
+- login
+- signup_try
+- signup
+- logout
+
+### Rental
+
+---
+
+- rent
+- return
+- rented_now
+- record
+
+### Comment
+
+---
+
+- delete
+
+### Admin
+
+---
+
+- login_try
+- admin_login
+- dashboard
+- add_data_try
+- add_data
+- logout
+
+## **5. 데이터베이스 구조**
 
 |   구분    |                             설명                             |            목적            |
 | :-------: | :----------------------------------------------------------: | :------------------------: |
