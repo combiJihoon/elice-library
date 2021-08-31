@@ -63,15 +63,11 @@
 
 ### Main
 
----
-
 - home
 - detail
 - create-comment
 
 ### Auth
-
----
 
 - login_try
 - login
@@ -81,8 +77,6 @@
 
 ### Rental
 
----
-
 - rent
 - return
 - rented_now
@@ -90,13 +84,9 @@
 
 ### Comment
 
----
-
 - delete
 
 ### Admin
-
----
 
 - login_try
 - admin_login
