@@ -1,5 +1,7 @@
 # 온라인 도서관(레이서 도서관) :books:
 
+[온라인 도서관 이동하기](http://kdt-1st-project-48.koreacentral.cloudapp.azure.com/)
+
 ## **1. 프로젝트 소개**
 
 > **온라인으로 도서 내여와 반납을 관리할 수 있는 '책 대여 웹 서비스'**
