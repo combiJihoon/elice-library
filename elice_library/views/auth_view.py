@@ -41,7 +41,7 @@ def login():
         # return redirect(url_for('auth.login_try'))
         return render_template('auth/login.html', user_password=user_password, user_id=user_id)
 
-    elif not checkpw(user_password.encode('utf-8'), user_data.user_password):
+    elif not checkpw(user_password.encode('utf-8'), user_data.user_password.encode('utf-8')):
         flash('비밀번호가 일치하지 않습니다.')
         # return redirect(url_for('auth.login_try'))
         return render_template('auth/login.html', user_password=user_password, user_id=user_id)
