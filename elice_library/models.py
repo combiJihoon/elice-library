@@ -27,7 +27,7 @@ class Book(db.Model):
     author = db.Column(db.String(100), nullable=False)
     publicated_at = db.Column(db.DateTime, nullable=False)
     pages = db.Column(db.Integer, nullable=False)
-    isbn = db.Column(db.Integer, nullable=False)
+    isbn = db.Column(db.String(250), nullable=False, unique=True)
     description = db.Column(db.Text(), nullable=True)
     link = db.Column(db.String(255), nullable=False)
     img_url = db.Column(db.String(255), nullable=True)
@@ -95,10 +95,10 @@ class UserRoles(db.Model):
 class AddStock(db.Model):
     __tablename__ = 'add_stock'
 
-    id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey(
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
         'user.user_id', ondelete='CASCADE'), nullable=False)
-    isbn = db.Column(db.Integer(), db.ForeignKey(
+    isbn = db.Column(db.String(250), db.ForeignKey(
         'book.isbn', ondelete='CASCADE'), nullable=False)
     added_at = db.Column(
         db.DateTime, default=datetime.now(), nullable=False)
