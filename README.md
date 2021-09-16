@@ -1,6 +1,6 @@
 # 온라인 도서관(레이서 도서관) :books:
 
-[온라인 도서관 이동하기](http://kdt-1st-project-48.koreacentral.cloudapp.azure.com/)
+[온라인 도서관 이동하기](http://online-library.eastus.cloudapp.azure.com/)
 
 ## **1. 프로젝트 소개**
 
