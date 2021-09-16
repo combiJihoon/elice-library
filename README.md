@@ -13,7 +13,7 @@
 |:---:|:---:|
 |Front|HTML, jinja2, CSS|
 |Server|Flask|
-|DB|SQLite, SQLAlchemy|
+|DB|SQLite, SQLAlchemy, MySQL|
 
 ## **2. 프로젝트 목표**
 
